@@ -1,26 +1,14 @@
-{% load static %}
+{% load static i18n %}
 <!doctype html>
-<html class="no-js" lang="es">
+<html class="no-js" lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% block title %}ATGilet{% endblock %}</title>
+    <title>{% block title %}{% trans "Soccer Bootstrap Theme" %}{% endblock %}</title>
     <meta name="description" content="{% block meta_description %}{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    {# Favicon #}
-    <link rel="icon" type="image/png" sizes="32x32"
-          href="{% static 'img/favicon/cropped-Logo-At-Gilet-32x32.jpg' %}">
-    <link rel="icon" type="image/png" sizes="180x180"
-          href="{% static 'img/favicon/cropped-Logo-At-Gilet-180x180.jpg' %}">
-    <link rel="icon" type="image/png" sizes="192x192"
-          href="{% static 'img/favicon/cropped-Logo-At-Gilet-192x192.jpg' %}">
-    <link rel="icon" type="image/png" sizes="270x270"
-          href="{% static 'img/favicon/cropped-Logo-At-Gilet-270x270.jpg' %}">
-    <link rel="apple-touch-icon"
-          href="{% static 'img/favicon/cropped-Logo-At-Gilet-180x180.jpg' %}">
-
-    {# CSS из темы #}
+    <link rel="apple-touch-icon" href="{% static 'apple-touch-icon.png' %}">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
     <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
@@ -42,41 +30,37 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body>
-<!--[if lt IE 8]>
-<p class="browserupgrade">
-    You are using an <strong>outdated</strong> browser. Please
-    <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
-</p>
-<![endif]-->
 
 <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
 
-    {# ****** MOBILE MENU ****** #}
+    <!--************************************
+            Mobile Menu Start
+    *************************************-->
     <div id="tg-navigationm-mobile" class="tg-navigationm-mobile tg-navigation collapse navbar-collapse">
         <span id="tg-close" class="tg-close fa fa-close"></span>
         <div class="tg-colhalf">
             <ul>
                 <li class="active menu-item-has-children">
-                    <a href="#">Main</a>
+                    <a href="#">{% trans "Main" %}</a>
                     <ul class="tg-dropdown-menu">
-                        <li class="active"><a href="#">home1</a></li>
-                        <li><a href="#">home2</a></li>
+                        <li class="active"><a href="#">{% trans "Home 1" %}</a></li>
+                        <li><a href="#">{% trans "Home 2" %}</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children">
-                    <a href="#">team</a>
+                    <a href="#">{% trans "Team" %}</a>
                     <ul class="tg-dropdown-menu">
-                        <li><a href="#">playergrid-v1</a></li>
-                        <li><a href="#">playergrid-v2</a></li>
-                        <li><a href="#">playergrid detail</a></li>
+                        <li><a href="#">{% trans "Player grid v1" %}</a></li>
+                        <li><a href="#">{% trans "Player grid v2" %}</a></li>
+                        <li><a href="#">{% trans "Player detail" %}</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Buy Tickets</a></li>
+                <li><a href="#">{% trans "Buy Tickets" %}</a></li>
                 <li class="menu-item-has-children">
-                    <a href="#">Match Results</a>
+                    <a href="#">{% trans "Match Results" %}</a>
                     <ul class="tg-dropdown-menu">
-                        <li><a href="#">match result</a></li>
-                        <li><a href="#">match result detail</a></li>
+                        <li><a href="#">{% trans "Match result" %}</a></li>
+                        <li><a href="#">{% trans "Match result detail" %}</a></li>
                     </ul>
                 </li>
             </ul>
@@ -84,39 +68,44 @@
         <div class="tg-colhalf">
             <ul>
                 <li class="menu-item-has-children">
-                    <a href="#">fixtures</a>
+                    <a href="#">{% trans "Fixtures" %}</a>
                     <ul class="tg-dropdown-menu">
-                        <li><a href="#">fixtures</a></li>
-                        <li><a href="#">fixture detail</a></li>
+                        <li><a href="#">{% trans "Fixtures list" %}</a></li>
+                        <li><a href="#">{% trans "Fixture detail" %}</a></li>
                     </ul>
                 </li>
                 <li class="menu-item-has-children">
-                    <a href="#">pro soccer media</a>
+                    <a href="#">{% trans "Pro soccer media" %}</a>
                     <ul class="tg-dropdown-menu">
-                        <li><a href="#">pro soccer media1</a></li>
-                        <li><a href="#">pro soccer media2</a></li>
+                        <li><a href="#">{% trans "Pro soccer media 1" %}</a></li>
+                        <li><a href="#">{% trans "Pro soccer media 2" %}</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#">{% trans "Contact" %}</a></li>
                 <li class="menu-item-has-children">
                     <a href="#"><i class="fa fa-navicon"></i></a>
                     <ul>
-                        <li><a href="#">about us</a></li>
-                        <li><a href="#">shop list</a></li>
-                        <li><a href="#">shop grid</a></li>
-                        <li><a href="#">shop detail</a></li>
-                        <li><a href="#">blog list</a></li>
-                        <li><a href="#">blog grid</a></li>
-                        <li><a href="#">blog detail</a></li>
-                        <li><a href="#">404 error</a></li>
-                        <li><a href="#">coming soon</a></li>
+                        <li><a href="#">{% trans "About us" %}</a></li>
+                        <li><a href="#">{% trans "Shop list" %}</a></li>
+                        <li><a href="#">{% trans "Shop grid" %}</a></li>
+                        <li><a href="#">{% trans "Shop detail" %}</a></li>
+                        <li><a href="#">{% trans "Blog list" %}</a></li>
+                        <li><a href="#">{% trans "Blog grid" %}</a></li>
+                        <li><a href="#">{% trans "Blog detail" %}</a></li>
+                        <li><a href="#">{% trans "404 error" %}</a></li>
+                        <li><a href="#">{% trans "Coming soon" %}</a></li>
                     </ul>
                 </li>
             </ul>
         </div>
     </div>
+    <!--************************************
+            Mobile Menu End
+    *************************************-->
 
-    {# ****** HEADER ****** #}
+    <!--************************************
+            Header Start
+    *************************************-->
     <header id="tg-header" class="tg-header tg-haslayout">
         <div class="container">
             <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
@@ -124,7 +113,8 @@
                     <div class="tg-topbar tg-haslayout">
                         <nav id="tg-topaddnav" class="tg-topaddnav">
                             <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed"
+                                <button type="button"
+                                        class="navbar-toggle collapsed"
                                         data-toggle="collapse"
                                         data-target="#tg-addnavigationm-mobile">
                                     <i class="fa fa-arrow-right"></i>
@@ -135,8 +125,20 @@
                                 <div class="tg-colhalf pull-right">
                                     <nav class="tg-addnav">
                                         <ul>
-                                            <li><a href="#" data-toggle="modal" data-target="#tg-login">login</a></li>
-                                            <li><a href="#" data-toggle="modal" data-target="#tg-register">Register</a></li>
+                                            <li>
+                                                <a href="javascript:void(0)"
+                                                   data-toggle="modal"
+                                                   data-target="#tg-login">
+                                                    {% trans "Login" %}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="javascript:void(0)"
+                                                   data-toggle="modal"
+                                                   data-target="#tg-register">
+                                                    {% trans "Register" %}
+                                                </a>
+                                            </li>
                                             <li>
                                                 <div class="tg-cart">
                                                     <a href="javascript:void(0)"
@@ -147,7 +149,63 @@
                                                     </a>
                                                     <div class="tg-cartcontent dropdown-menu"
                                                          aria-labelledby="tg-cartdropdown">
-                                                        {# можно потом удалить / заменить тестовый контент корзины #}
+                                                        <ul>
+                                                            <li>
+                                                                <figure>
+                                                                    <a href="#">
+                                                                        <img src="{% static 'images/thumbnails/img-01.jpg' %}"
+                                                                             alt="">
+                                                                    </a>
+                                                                </figure>
+                                                                <div class="tg-product-detail">
+                                                                    <h3><a href="#">{% trans "Smooth 3-Stripes Scarf" %}</a></h3>
+                                                                    <span class="tg-price">
+                                                                        {% trans "Price:" %} $23
+                                                                    </span>
+                                                                    <a class="tg-delete" href="#"></a>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <figure>
+                                                                    <a href="#">
+                                                                        <img src="{% static 'images/thumbnails/img-02.jpg' %}"
+                                                                             alt="">
+                                                                    </a>
+                                                                </figure>
+                                                                <div class="tg-product-detail">
+                                                                    <h3><a href="#">{% trans "Smooth 3-Stripes Scarf" %}</a></h3>
+                                                                    <span class="tg-price">
+                                                                        {% trans "Price:" %} $23
+                                                                    </span>
+                                                                    <a class="tg-delete" href="#"></a>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <figure>
+                                                                    <a href="#">
+                                                                        <img src="{% static 'images/thumbnails/img-03.jpg' %}"
+                                                                             alt="">
+                                                                    </a>
+                                                                </figure>
+                                                                <div class="tg-product-detail">
+                                                                    <h3><a href="#">{% trans "Smooth 3-Stripes Scarf" %}</a></h3>
+                                                                    <span class="tg-price">
+                                                                        {% trans "Price:" %} $23
+                                                                    </span>
+                                                                    <a class="tg-delete" href="#"></a>
+                                                                </div>
+                                                            </li>
+                                                            <li>
+                                                                <div class="tg-btnbox">
+                                                                    <strong class="tg-carttotal">
+                                                                        {% trans "Total:" %} $134
+                                                                    </strong>
+                                                                    <a class="tg-btn" href="#">
+                                                                        <span>{% trans "Checkout" %}</span>
+                                                                    </a>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
                                                     </div>
                                                 </div>
                                             </li>
@@ -174,14 +232,15 @@
 
                     <nav id="tg-nav" class="tg-nav brand-center">
                         <div class="navbar-header">
-                            <button type="button" class="navbar-toggle collapsed"
+                            <button type="button"
+                                    class="navbar-toggle collapsed"
                                     data-toggle="collapse"
                                     data-target="#tg-navigationm-mobile">
                                 <i class="fa fa-bars"></i>
                             </button>
                             <strong class="tg-logo">
                                 <a href="{% url 'home' %}">
-                                    <img src="{% static 'images/logo.png' %}" alt="ATGilet">
+                                    <img src="{% static 'images/logo.png' %}" alt="logo">
                                 </a>
                             </strong>
                         </div>
@@ -189,26 +248,30 @@
                             <div class="tg-colhalf">
                                 <ul>
                                     <li class="active">
-                                        <a href="{% url 'home' %}">Main</a>
+                                        <a href="#">{% trans "Main" %}</a>
                                         <ul class="tg-dropdown-menu">
-                                            <li class="active"><a href="{% url 'home' %}">home1</a></li>
-                                            <li><a href="#">home2</a></li>
+                                            <li class="active">
+                                                <a href="#">{% trans "Home 1" %}</a>
+                                            </li>
+                                            <li>
+                                                <a href="#">{% trans "Home 2" %}</a>
+                                            </li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#">team</a>
+                                        <a href="#">{% trans "Team" %}</a>
                                         <ul class="tg-dropdown-menu">
-                                            <li><a href="#">playergrid-v1</a></li>
-                                            <li><a href="#">playergrid-v2</a></li>
-                                            <li><a href="#">playergrid detail</a></li>
+                                            <li><a href="#">{% trans "Player grid v1" %}</a></li>
+                                            <li><a href="#">{% trans "Player grid v2" %}</a></li>
+                                            <li><a href="#">{% trans "Player detail" %}</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Buy Tickets</a></li>
+                                    <li><a href="#">{% trans "Buy Tickets" %}</a></li>
                                     <li>
-                                        <a href="#">Match Results</a>
+                                        <a href="#">{% trans "Match Results" %}</a>
                                         <ul class="tg-dropdown-menu">
-                                            <li><a href="#">match result</a></li>
-                                            <li><a href="#">match result detail</a></li>
+                                            <li><a href="#">{% trans "Match result" %}</a></li>
+                                            <li><a href="#">{% trans "Match result detail" %}</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -216,32 +279,32 @@
                             <div class="tg-colhalf">
                                 <ul>
                                     <li>
-                                        <a href="#">fixtures</a>
+                                        <a href="#">{% trans "Fixtures" %}</a>
                                         <ul class="tg-dropdown-menu">
-                                            <li><a href="#">fixtures</a></li>
-                                            <li><a href="#">fixture detail</a></li>
+                                            <li><a href="#">{% trans "Fixtures list" %}</a></li>
+                                            <li><a href="#">{% trans "Fixture detail" %}</a></li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#">pro soccer media</a>
+                                        <a href="#">{% trans "Pro soccer media" %}</a>
                                         <ul class="tg-dropdown-menu">
-                                            <li><a href="#">pro soccer media1</a></li>
-                                            <li><a href="#">pro soccer media2</a></li>
+                                            <li><a href="#">{% trans "Pro soccer media 1" %}</a></li>
+                                            <li><a href="#">{% trans "Pro soccer media 2" %}</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Contact</a></li>
+                                    <li><a href="#">{% trans "Contact" %}</a></li>
                                     <li>
                                         <a href="#"><i class="fa fa-navicon"></i></a>
                                         <ul>
-                                            <li><a href="#">about us</a></li>
-                                            <li><a href="#">shop list</a></li>
-                                            <li><a href="#">shop grid</a></li>
-                                            <li><a href="#">shop detail</a></li>
-                                            <li><a href="#">blog list</a></li>
-                                            <li><a href="#">blog grid</a></li>
-                                            <li><a href="#">blog detail</a></li>
-                                            <li><a href="#">404 error</a></li>
-                                            <li><a href="#">coming soon</a></li>
+                                            <li><a href="#">{% trans "About us" %}</a></li>
+                                            <li><a href="#">{% trans "Shop list" %}</a></li>
+                                            <li><a href="#">{% trans "Shop grid" %}</a></li>
+                                            <li><a href="#">{% trans "Shop detail" %}</a></li>
+                                            <li><a href="#">{% trans "Blog list" %}</a></li>
+                                            <li><a href="#">{% trans "Blog grid" %}</a></li>
+                                            <li><a href="#">{% trans "Blog detail" %}</a></li>
+                                            <li><a href="#">{% trans "404 error" %}</a></li>
+                                            <li><a href="#">{% trans "Coming soon" %}</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -253,37 +316,196 @@
             </div>
         </div>
     </header>
+    <!--************************************
+            Header End
+    *************************************-->
 
-    {# ****** ОСНОВНОЙ КОНТЕНТ СТРАНИЦЫ ****** #}
-    {% block content %}
-    {% endblock %}
+    <!--************************************
+            Main Start (content block)
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        {% block content %}{% endblock %}
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
 
-    {# ****** FOOTER ****** #}
+    <!--************************************
+            Footer Start
+    *************************************-->
     <footer id="tg-footer" class="tg-footer tg-haslayout">
-        {# сюда можно потом подставить свой реальный футер клуба #}
+        <div class="tg-haslayout tg-footerinfobox">
+            <div class="tg-bgboxone"></div>
+            <div class="tg-bgboxtwo"></div>
+            <div class="tg-footerinfo">
+                <div class="container">
+                    <div class="row">
+                        <!-- Col 1 -->
+                        <div class="col-sm-4">
+                            <div class="tg-footercol">
+                                <div class="tg-posttitle">
+                                    <h3>{% trans "Signup newsletter" %}</h3>
+                                </div>
+                                <div class="tg-description">
+                                    <p>Adipisicing elit, sed do eiusmod tempor incidunta utiai labore et dolore magna si aliqua quis.</p>
+                                </div>
+                                <form class="tg-form-newsletter">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <input type="email"
+                                                   class="form-control"
+                                                   name="email"
+                                                   placeholder="{% trans 'Email' %}">
+                                        </div>
+                                        <button class="tg-btn" type="submit">
+                                            {% trans "Signup" %}
+                                        </button>
+                                    </fieldset>
+                                </form>
+                                <div class="tg-posttitle">
+                                    <h3>{% trans "Popular tags" %}</h3>
+                                </div>
+                                <div class="tg-tags">
+                                    <a class="tg-tag" href="#">{% trans "fashion" %}</a>
+                                    <a class="tg-tag" href="#">{% trans "travel" %}</a>
+                                    <a class="tg-tag" href="#">{% trans "blog" %}</a>
+                                    <a class="tg-tag" href="#">{% trans "sports" %}</a>
+                                    <a class="tg-tag" href="#">{% trans "magazine" %}</a>
+                                    <a class="tg-tag" href="#">{% trans "ui" %}</a>
+                                    <a class="tg-tag" href="#">{% trans "tech" %}</a>
+                                    <a class="tg-tag" href="#">{% trans "fun time" %}</a>
+                                    <a class="tg-tag" href="#">{% trans "soccer" %}</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Col 2 -->
+                        <div class="col-sm-4">
+                            <div class="tg-footercol">
+                                <div class="tg-posttitle">
+                                    <h3>{% trans "Top products" %}</h3>
+                                </div>
+                                <div class="tg-toprated">
+                                    <ul>
+                                        <li>
+                                            <figure>
+                                                <a href="#">
+                                                    <img src="{% static 'images/thumbnails/img-04.jpg' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="tg-productcontent">
+                                                <h4><a href="#">{% trans "Smooth 3-Stripes Scarf" %}</a></h4>
+                                                <span class="tg-stars"><span></span></span>
+                                                <span class="tg-price">{% trans "Price:" %} $67</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <figure>
+                                                <a href="#">
+                                                    <img src="{% static 'images/thumbnails/img-05.jpg' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="tg-productcontent">
+                                                <h4><a href="#">{% trans "Smooth 3-Stripes Scarf" %}</a></h4>
+                                                <span class="tg-stars"><span></span></span>
+                                                <span class="tg-price">{% trans "Price:" %} $67</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <figure>
+                                                <a href="#">
+                                                    <img src="{% static 'images/thumbnails/img-06.jpg' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="tg-productcontent">
+                                                <h4><a href="#">{% trans "Smooth 3-Stripes Scarf" %}</a></h4>
+                                                <span class="tg-stars"><span></span></span>
+                                                <span class="tg-price">{% trans "Price:" %} $67</span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <figure>
+                                                <a href="#">
+                                                    <img src="{% static 'images/thumbnails/img-07.jpg' %}" alt="">
+                                                </a>
+                                            </figure>
+                                            <div class="tg-productcontent">
+                                                <h4><a href="#">{% trans "Smooth 3-Stripes Scarf" %}</a></h4>
+                                                <span class="tg-stars"><span></span></span>
+                                                <span class="tg-price">{% trans "Price:" %} $67</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Col 3 -->
+                        <div class="col-sm-4">
+                            <div class="tg-footercol">
+                                <div class="tg-haslayout">
+                                    <strong class="tg-logo">
+                                        <a href="#">
+                                            <img src="{% static 'images/logo2.png' %}" alt="logo">
+                                        </a>
+                                    </strong>
+                                </div>
+                                <div class="tg-description">
+                                    <p>Consectetur adipisicing elit sedtado eiusmod dunt ut labore et dolore magna aliqua enim minim veniami quis nostrud.</p>
+                                </div>
+                                <ul class="tg-contactinfo">
+                                    <li>
+                                        <i class="fa fa-home"></i>
+                                        <address>123 Eccles Old Road, New Salford Road London, Uk, M6 7AF</address>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-envelope-o"></i>
+                                        <a href="mailto:info@domain.com">info@domain.com</a>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-phone"></i>
+                                        <span>+44 123 456 788 - 9</span>
+                                    </li>
+                                </ul>
+                                <div class="tg-haslayout">
+                                    <a class="tg-btn" href="#">
+                                        {% trans "Read more" %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- row -->
+                </div>
+            </div>
+        </div>
+
         <div class="tg-footerbar">
             <div class="container">
                 <span class="tg-copyright">
-                    © {{ now|date:"Y" }} ATGilet
+                    © {% now "Y" %} {% trans "Templates Hub" %}
                 </span>
                 <nav class="tg-footernav">
                     <ul>
-                        <li><a href="{% url 'home' %}">Main</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Buy Tickets</a></li>
-                        <li><a href="#">Match Results</a></li>
-                        <li><a href="#">Upcoming Matches</a></li>
-                        <li><a href="#">Shop</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">{% trans "Main" %}</a></li>
+                        <li><a href="#">{% trans "Team" %}</a></li>
+                        <li><a href="#">{% trans "Buy Tickets" %}</a></li>
+                        <li><a href="#">{% trans "Match Results" %}</a></li>
+                        <li><a href="#">{% trans "Upcoming Matches" %}</a></li>
+                        <li><a href="#">{% trans "Shop" %}</a></li>
+                        <li><a href="#">{% trans "Contact" %}</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </footer>
+    <!--************************************
+            Footer End
+    *************************************-->
+</div>
 
-</div> {# /tg-wrapper #}
-
-{# ****** SEARCH BOX ****** #}
+<!--************************************
+        Search Start
+*************************************-->
 <div class="tg-searchbox">
     <a id="tg-close-search" class="tg-close-search" href="javascript:void(0)">
         <span class="fa fa-close"></span>
@@ -294,26 +516,146 @@
                 <div class="col-sm-6 col-sm-offset-3">
                     <form class="tg-form-search">
                         <fieldset>
-                            <input type="search" class="form-control" placeholder="keyword">
+                            <input type="search"
+                                   class="form-control"
+                                   placeholder="{% trans 'Keyword' %}">
                             <i class="icon-icon_search2"></i>
                         </fieldset>
                     </form>
-                    <p>Start typing and press Enter to search</p>
+                    <p>{% trans "Start typing and press Enter to search" %}</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!--************************************
+        Search End
+*************************************-->
 
-{# Модалки логина/регистрации можно оставить как есть или удалить позже #}
+<!--************************************
+        Modals Start
+*************************************-->
 <div class="tg-modalbox modal fade" id="tg-login" tabindex="-1" role="dialog">
-    ...
-</div>
-<div class="tg-modalbox modal fade" id="tg-register" tabindex="-1" role="dialog">
-    ...
+    <div class="modal-dialog" role="document">
+        <div class="tg-modal-content">
+            <div class="tg-formarea">
+                <div class="tg-border-heading">
+                    <h3>{% trans "Login" %}</h3>
+                </div>
+                <form class="tg-loginform" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="text"
+                                   name="userName_email"
+                                   class="form-control"
+                                   placeholder="{% trans 'Username or email' %}">
+                        </div>
+                        <div class="form-group">
+                            <input type="password"
+                                   name="password"
+                                   class="form-control"
+                                   placeholder="{% trans 'Password' %}">
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox"
+                                       value="rememberme"
+                                       class="checkbox">
+                                <em>{% trans "Remember Me" %}</em>
+                            </label>
+                            <a href="#">
+                                <em>{% trans "Forgot Password" %}</em>
+                                <i class="fa fa-question-circle"></i>
+                            </a>
+                        </div>
+                        <div class="form-group">
+                            <button class="tg-btn tg-btn-lg" type="submit">
+                                {% trans "Login Now" %}
+                            </button>
+                        </div>
+                        <div class="tg-description">
+                            <p>
+                                {% trans "Don't have an account?" %}
+                                <a href="#">{% trans "Signup" %}</a>
+                            </p>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="tg-logintype">
+                <div class="tg-border-heading">
+                    <h3>{% trans "Login with" %}</h3>
+                </div>
+                <ul>
+                    <li class="tg-facebook"><a href="#">facebook</a></li>
+                    <li class="tg-twitter"><a href="#">twitter</a></li>
+                    <li class="tg-googleplus"><a href="#">google+</a></li>
+                    <li class="tg-linkedin"><a href="#">linkedin</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 
-{# JS #}
+<div class="tg-modalbox modal fade" id="tg-register" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="tg-modal-content">
+            <div class="tg-formarea">
+                <div class="tg-border-heading">
+                    <h3>{% trans "Signup" %}</h3>
+                </div>
+                <form class="tg-loginform" method="post">
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="text"
+                                   name="userName"
+                                   class="form-control"
+                                   placeholder="{% trans 'Username' %}">
+                        </div>
+                        <div class="form-group">
+                            <input type="email"
+                                   name="email"
+                                   class="form-control"
+                                   placeholder="{% trans 'Email' %}">
+                        </div>
+                        <div class="form-group">
+                            <div class="tg-note">
+                                <i class="fa fa-exclamation-circle"></i>
+                                <span>{% trans "We will email you your password." %}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button class="tg-btn tg-btn-lg" type="submit">
+                                {% trans "Signup Now" %}
+                            </button>
+                        </div>
+                        <div class="tg-description">
+                            <p>
+                                {% trans "Already have an account?" %}
+                                <a href="#">{% trans "Login" %}</a>
+                            </p>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="tg-logintype">
+                <div class="tg-border-heading">
+                    <h3>{% trans "Signup with" %}</h3>
+                </div>
+                <ul>
+                    <li class="tg-facebook"><a href="#">facebook</a></li>
+                    <li class="tg-twitter"><a href="#">twitter</a></li>
+                    <li class="tg-googleplus"><a href="#">google+</a></li>
+                    <li class="tg-linkedin"><a href="#">linkedin</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--************************************
+        Modals End
+*************************************-->
+
 <script src="{% static 'js/vendor/jquery-library.js' %}"></script>
 <script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
 <script src="{% static 'js/customScrollbar.min.js' %}"></script>
@@ -326,6 +668,6 @@
 <script src="{% static 'js/appear.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 
-{% block extra_scripts %}{% endblock %}
+{% block extra_js %}{% endblock %}
 </body>
 </html>
