@@ -1,8 +1,8 @@
 from django.urls import path
-from .views import maintenance_page
+from .views import under_construction
 
 app_name = "maintenance"
 
 urlpatterns = [
-    path("", maintenance_page, name="maintenance"),
+    path("", under_construction, name="maintenance"),
 ]
