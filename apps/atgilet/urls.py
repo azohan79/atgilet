@@ -1,12 +1,14 @@
 from django.contrib import admin
 from django.urls import path, include
+from .views import front_router
 
 urlpatterns = [
     path("admin/", admin.site.urls),
 
-    # На корне сейчас будет maintenance
-    path("", include("maintenance.urls")),
+    # корень сайта — динамический роутер
+    path("", front_router, name="home"),
 
-    # Основной сайт позже станет на корне
+    # прямые адреса (если нужно заходить напрямую)
     path("web/", include("web.urls")),
+    path("maintenance/", include("maintenance.urls")),
 ]

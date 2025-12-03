@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'maintenance',
     'web',
+    'siteconfig',
 ]
 
 MIDDLEWARE = [
