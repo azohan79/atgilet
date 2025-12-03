@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
-def under_construction(request):
+def maintenance_page(request):
     return render(request, "maintenance/index.html")
