@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtualenv
+venv/
+
+# Django
+*.sqlite3
+/staticfiles/
+media/
+
+# Logs
+*.log
+logs/
+*.pid
+
+# Nginx/Panel artifacts
+*.sock
+
+# VSCode / IDE
+.vscode/
+.idea/
+
+# System
+.DS_Store
+
+# Secret Django settings (if any)
+.env
+.env.*
