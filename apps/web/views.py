@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+
+def home(request):
+    """
+    Главная страница основного сайта ATGilet.
+    Пока простая заглушка, позже сюда прикрутим нормальный layout.
+    """
+    return render(request, "web/index.html")
