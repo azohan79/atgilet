@@ -1,20 +1,16 @@
 from django.contrib import admin
-from .models import Menu, MenuItem, SettingsConfig
+from .models import SettingsConfig, Menu, MenuItem
 
 
 @admin.register(SettingsConfig)
 class SettingsConfigAdmin(admin.ModelAdmin):
     list_display = ("maintenance_mode",)
 
+    # если нужна только одна запись настроек
     def has_add_permission(self, request):
-        # Разрешаем создать только ОДНУ запись настроек
         if SettingsConfig.objects.exists():
             return False
         return super().has_add_permission(request)
-    
-@admin.register(SettingsConfig)
-class SettingsConfigAdmin(admin.ModelAdmin):
-    list_display = ("maintenance_mode",)
 
 
 class MenuItemInline(admin.TabularInline):
