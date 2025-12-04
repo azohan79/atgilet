@@ -281,19 +281,32 @@
                                         </button>
                                     </fieldset>
                                 </form>
-                                <div class="tg-posttitle">
+                        <div class="tg-posttitle">
                                     <h3>{% trans "Popular tags" %}</h3>
                                 </div>
                                 <div class="tg-tags">
-                                    <a class="tg-tag" href="#">{% trans "fashion" %}</a>
-                                    <a class="tg-tag" href="#">{% trans "travel" %}</a>
-                                    <a class="tg-tag" href="#">{% trans "blog" %}</a>
-                                    <a class="tg-tag" href="#">{% trans "sports" %}</a>
-                                    <a class="tg-tag" href="#">{% trans "magazine" %}</a>
-                                    <a class="tg-tag" href="#">{% trans "ui" %}</a>
-                                    <a class="tg-tag" href="#">{% trans "tech" %}</a>
-                                    <a class="tg-tag" href="#">{% trans "fun time" %}</a>
-                                    <a class="tg-tag" href="#">{% trans "soccer" %}</a>
+                                    {% if menu_footer_tags %}
+                                        {% for item in menu_footer_tags.root_items %}
+                                            {% if item.is_active %}
+                                                <a class="tg-tag"
+                                                href="{{ item.get_url }}"
+                                                {% if item.open_in_new_tab %}target="_blank"{% endif %}>
+                                                    {{ item.title }}
+                                                </a>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% else %}
+                                        {# опционально: резервный статический вариант, если меню не создано #}
+                                        <a class="tg-tag" href="#">{% trans "fashion" %}</a>
+                                        <a class="tg-tag" href="#">{% trans "travel" %}</a>
+                                        <a class="tg-tag" href="#">{% trans "blog" %}</a>
+                                        <a class="tg-tag" href="#">{% trans "sports" %}</a>
+                                        <a class="tg-tag" href="#">{% trans "magazine" %}</a>
+                                        <a class="tg-tag" href="#">{% trans "ui" %}</a>
+                                        <a class="tg-tag" href="#">{% trans "tech" %}</a>
+                                        <a class="tg-tag" href="#">{% trans "fun time" %}</a>
+                                        <a class="tg-tag" href="#">{% trans "soccer" %}</a>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -403,17 +416,35 @@
                 <span class="tg-copyright">
                     © {% now "Y" %} {% trans "Templates Hub" %}
                 </span>
-                <nav class="tg-footernav">
-                    <ul>
-                        <li><a href="#">{% trans "Main" %}</a></li>
-                        <li><a href="#">{% trans "Team" %}</a></li>
-                        <li><a href="#">{% trans "Buy Tickets" %}</a></li>
-                        <li><a href="#">{% trans "Match Results" %}</a></li>
-                        <li><a href="#">{% trans "Upcoming Matches" %}</a></li>
-                        <li><a href="#">{% trans "Shop" %}</a></li>
-                        <li><a href="#">{% trans "Contact" %}</a></li>
-                    </ul>
-                </nav>
+                    <nav class="tg-footernav">
+                        <ul>
+                            {% if menu_footer_bottom %}
+                                {% for item in menu_footer_bottom.root_items %}
+                                    {% if item.is_active %}
+                                        <li class="{{ item.css_class }}">
+                                            <a href="{{ item.get_url }}"
+                                            {% if item.open_in_new_tab %}target="_blank"{% endif %}
+                                            {{ item.html_attributes|safe }}>
+                                                {% if item.icon_class %}
+                                                    <i class="{{ item.icon_class }}"></i>
+                                                {% endif %}
+                                                {{ item.title }}
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% else %}
+                                {# резервное статическое меню, если пока нет записей #}
+                                <li><a href="#">{% trans "Main" %}</a></li>
+                                <li><a href="#">{% trans "Team" %}</a></li>
+                                <li><a href="#">{% trans "Buy Tickets" %}</a></li>
+                                <li><a href="#">{% trans "Match Results" %}</a></li>
+                                <li><a href="#">{% trans "Upcoming Matches" %}</a></li>
+                                <li><a href="#">{% trans "Shop" %}</a></li>
+                                <li><a href="#">{% trans "Contact" %}</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
             </div>
         </div>
     </footer>
