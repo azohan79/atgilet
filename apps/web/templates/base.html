@@ -48,69 +48,58 @@
     <!--************************************
             Mobile Menu Start
     *************************************-->
-    <div id="tg-navigationm-mobile" class="tg-navigationm-mobile tg-navigation collapse navbar-collapse">
-        <span id="tg-close" class="tg-close fa fa-close"></span>
-        <div class="tg-colhalf">
-            <ul>
-                <li class="active menu-item-has-children">
-                    <a href="#">{% trans "Main" %}</a>
-                    <ul class="tg-dropdown-menu">
-                        <li class="active"><a href="#">{% trans "Home 1" %}</a></li>
-                        <li><a href="#">{% trans "Home 2" %}</a></li>
-                    </ul>
-                </li>
-                <li class="menu-item-has-children">
-                    <a href="#">{% trans "Team" %}</a>
-                    <ul class="tg-dropdown-menu">
-                        <li><a href="#">{% trans "Player grid v1" %}</a></li>
-                        <li><a href="#">{% trans "Player grid v2" %}</a></li>
-                        <li><a href="#">{% trans "Player detail" %}</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">{% trans "Buy Tickets" %}</a></li>
-                <li class="menu-item-has-children">
-                    <a href="#">{% trans "Match Results" %}</a>
-                    <ul class="tg-dropdown-menu">
-                        <li><a href="#">{% trans "Match result" %}</a></li>
-                        <li><a href="#">{% trans "Match result detail" %}</a></li>
-                    </ul>
-                </li>
-            </ul>
+        <div id="tg-navigationm-mobile" class="tg-navigationm-mobile tg-navigation collapse navbar-collapse">
+            <span id="tg-close" class="tg-close fa fa-close"></span>
+            <div class="tg-colhalf">
+                <ul>
+                    {% if menu_mobile_main_left %}
+                        {% for item in menu_mobile_main_left.root_items %}
+                            {% with has_children=item.has_children %}
+                            <li class="{% if has_children %}menu-item-has-children{% endif %}">
+                                <a href="{{ item.get_url }}">{{ item.title }}</a>
+                                {% if has_children %}
+                                    <ul class="tg-dropdown-menu">
+                                        {% for child in item.children.all %}
+                                            {% if child.is_active %}
+                                                <li><a href="{{ child.get_url }}">{{ child.title }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                            {% endwith %}
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="tg-colhalf">
+                <ul>
+                    {% if menu_mobile_main_right %}
+                        {% for item in menu_mobile_main_right.root_items %}
+                            {% with has_children=item.has_children %}
+                            <li class="{% if has_children %}menu-item-has-children{% endif %}">
+                                <a href="{{ item.get_url }}">
+                                    {% if item.icon_class %}<i class="{{ item.icon_class }}"></i>{% endif %}
+                                    {{ item.title }}
+                                </a>
+                                {% if has_children %}
+                                    <ul class="tg-dropdown-menu">
+                                        {% for child in item.children.all %}
+                                            {% if child.is_active %}
+                                                <li><a href="{{ child.get_url }}">{{ child.title }}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                            {% endwith %}
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+            </div>
         </div>
-        <div class="tg-colhalf">
-            <ul>
-                <li class="menu-item-has-children">
-                    <a href="#">{% trans "Fixtures" %}</a>
-                    <ul class="tg-dropdown-menu">
-                        <li><a href="#">{% trans "Fixtures list" %}</a></li>
-                        <li><a href="#">{% trans "Fixture detail" %}</a></li>
-                    </ul>
-                </li>
-                <li class="menu-item-has-children">
-                    <a href="#">{% trans "Pro soccer media" %}</a>
-                    <ul class="tg-dropdown-menu">
-                        <li><a href="#">{% trans "Pro soccer media 1" %}</a></li>
-                        <li><a href="#">{% trans "Pro soccer media 2" %}</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">{% trans "Contact" %}</a></li>
-                <li class="menu-item-has-children">
-                    <a href="#"><i class="fa fa-navicon"></i></a>
-                    <ul>
-                        <li><a href="#">{% trans "About us" %}</a></li>
-                        <li><a href="#">{% trans "Shop list" %}</a></li>
-                        <li><a href="#">{% trans "Shop grid" %}</a></li>
-                        <li><a href="#">{% trans "Shop detail" %}</a></li>
-                        <li><a href="#">{% trans "Blog list" %}</a></li>
-                        <li><a href="#">{% trans "Blog grid" %}</a></li>
-                        <li><a href="#">{% trans "Blog detail" %}</a></li>
-                        <li><a href="#">{% trans "404 error" %}</a></li>
-                        <li><a href="#">{% trans "Coming soon" %}</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
+
     <!--************************************
             Mobile Menu End
     *************************************-->
@@ -132,113 +121,46 @@
                                     <i class="fa fa-arrow-right"></i>
                                 </button>
                             </div>
-                            <div id="tg-addnavigationm-mobile"
-                                 class="tg-addnavigationm-mobile collapse navbar-collapse">
-                                <div class="tg-colhalf pull-right">
-                                    <nav class="tg-addnav">
-                                        <ul>
-                                            <li>
-                                                <a href="javascript:void(0)"
-                                                   data-toggle="modal"
-                                                   data-target="#tg-login">
-                                                    {% trans "Login" %}
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)"
-                                                   data-toggle="modal"
-                                                   data-target="#tg-register">
-                                                    {% trans "Register" %}
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <div class="tg-cart">
-                                                    <a href="javascript:void(0)"
-                                                       class="dropdown-toggle"
-                                                       id="tg-cartdropdown"
-                                                       data-toggle="dropdown">
-                                                        <i class="fa fa-shopping-cart"></i>
-                                                    </a>
-                                                    <div class="tg-cartcontent dropdown-menu"
-                                                         aria-labelledby="tg-cartdropdown">
-                                                        <ul>
-                                                            <li>
-                                                                <figure>
-                                                                    <a href="#">
-                                                                        <img src="{% static 'images/thumbnails/img-01.jpg' %}"
-                                                                             alt="">
-                                                                    </a>
-                                                                </figure>
-                                                                <div class="tg-product-detail">
-                                                                    <h3><a href="#">{% trans "Smooth 3-Stripes Scarf" %}</a></h3>
-                                                                    <span class="tg-price">
-                                                                        {% trans "Price:" %} $23
-                                                                    </span>
-                                                                    <a class="tg-delete" href="#"></a>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <figure>
-                                                                    <a href="#">
-                                                                        <img src="{% static 'images/thumbnails/img-02.jpg' %}"
-                                                                             alt="">
-                                                                    </a>
-                                                                </figure>
-                                                                <div class="tg-product-detail">
-                                                                    <h3><a href="#">{% trans "Smooth 3-Stripes Scarf" %}</a></h3>
-                                                                    <span class="tg-price">
-                                                                        {% trans "Price:" %} $23
-                                                                    </span>
-                                                                    <a class="tg-delete" href="#"></a>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <figure>
-                                                                    <a href="#">
-                                                                        <img src="{% static 'images/thumbnails/img-03.jpg' %}"
-                                                                             alt="">
-                                                                    </a>
-                                                                </figure>
-                                                                <div class="tg-product-detail">
-                                                                    <h3><a href="#">{% trans "Smooth 3-Stripes Scarf" %}</a></h3>
-                                                                    <span class="tg-price">
-                                                                        {% trans "Price:" %} $23
-                                                                    </span>
-                                                                    <a class="tg-delete" href="#"></a>
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <div class="tg-btnbox">
-                                                                    <strong class="tg-carttotal">
-                                                                        {% trans "Total:" %} $134
-                                                                    </strong>
-                                                                    <a class="tg-btn" href="#">
-                                                                        <span>{% trans "Checkout" %}</span>
-                                                                    </a>
-                                                                </div>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a id="tg-btn-search" href="javascript:void(0)">
-                                                    <i class="fa fa-search"></i>
-                                                </a>
-                                            </li>
+                                <div id="tg-addnavigationm-mobile"
+                                    class="tg-addnavigationm-mobile collapse navbar-collapse">
+                                    <div class="tg-colhalf pull-right">
+                                        <nav class="tg-addnav">
+                                            <ul>
+                                                {% if menu_header_top_auth %}
+                                                    {% for item in menu_header_top_auth.root_items %}
+                                                        <li class="{{ item.css_class }}">
+                                                            <a href="{{ item.get_url }}"
+                                                            {% if item.open_in_new_tab %}target="_blank"{% endif %}
+                                                            {{ item.html_attributes|safe }}>
+                                                                {% if item.icon_class %}
+                                                                    <i class="{{ item.icon_class }}"></i>
+                                                                {% endif %}
+                                                                {{ item.title }}
+                                                            </a>
+                                                        </li>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                    <div class="tg-colhalf">
+                                        <ul class="tg-socialicons">
+                                            {% if menu_header_top_social %}
+                                                {% for item in menu_header_top_social.root_items %}
+                                                    <li>
+                                                        <a href="{{ item.get_url }}"
+                                                        {% if item.open_in_new_tab %}target="_blank"{% endif %}>
+                                                            {% if item.icon_class %}
+                                                                <i class="{{ item.icon_class }}"></i>
+                                                            {% endif %}
+                                                            {% if item.title %}{{ item.title }}{% endif %}
+                                                        </a>
+                                                    </li>
+                                                {% endfor %}
+                                            {% endif %}
                                         </ul>
-                                    </nav>
+                                    </div>
                                 </div>
-                                <div class="tg-colhalf">
-                                    <ul class="tg-socialicons">
-                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                                    </ul>
-                                </div>
-                            </div>
                         </nav>
                     </div>
 
@@ -259,68 +181,64 @@
                         <div id="tg-navigation" class="tg-navigation">
                             <div class="tg-colhalf">
                                 <ul>
-                                    <li class="active">
-                                        <a href="#">{% trans "Main" %}</a>
-                                        <ul class="tg-dropdown-menu">
-                                            <li class="active">
-                                                <a href="#">{% trans "Home 1" %}</a>
+                                    {% if menu_header_main_left %}
+                                        {% for item in menu_header_main_left.root_items %}
+                                            {% with has_children=item.has_children %}
+                                            <li class="{% if has_children %}menu-item-has-children{% endif %} {{ item.css_class }}">
+                                                <a href="{{ item.get_url }}">
+                                                    {{ item.title }}
+                                                </a>
+                                                {% if has_children %}
+                                                    <ul class="tg-dropdown-menu">
+                                                        {% for child in item.children.all %}
+                                                            {% if child.is_active %}
+                                                                <li class="{{ child.css_class }}">
+                                                                    <a href="{{ child.get_url }}">{{ child.title }}</a>
+                                                                </li>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                {% endif %}
                                             </li>
-                                            <li>
-                                                <a href="#">{% trans "Home 2" %}</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">{% trans "Team" %}</a>
-                                        <ul class="tg-dropdown-menu">
-                                            <li><a href="#">{% trans "Player grid v1" %}</a></li>
-                                            <li><a href="#">{% trans "Player grid v2" %}</a></li>
-                                            <li><a href="#">{% trans "Player detail" %}</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">{% trans "Buy Tickets" %}</a></li>
-                                    <li>
-                                        <a href="#">{% trans "Match Results" %}</a>
-                                        <ul class="tg-dropdown-menu">
-                                            <li><a href="#">{% trans "Match result" %}</a></li>
-                                            <li><a href="#">{% trans "Match result detail" %}</a></li>
-                                        </ul>
-                                    </li>
+                                            {% endwith %}
+                                        {% endfor %}
+                                    {% endif %}
                                 </ul>
                             </div>
-                            <div class="tg-colhalf">
-                                <ul>
-                                    <li>
-                                        <a href="#">{% trans "Fixtures" %}</a>
-                                        <ul class="tg-dropdown-menu">
-                                            <li><a href="#">{% trans "Fixtures list" %}</a></li>
-                                            <li><a href="#">{% trans "Fixture detail" %}</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="#">{% trans "Pro soccer media" %}</a>
-                                        <ul class="tg-dropdown-menu">
-                                            <li><a href="#">{% trans "Pro soccer media 1" %}</a></li>
-                                            <li><a href="#">{% trans "Pro soccer media 2" %}</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">{% trans "Contact" %}</a></li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-navicon"></i></a>
-                                        <ul>
-                                            <li><a href="#">{% trans "About us" %}</a></li>
-                                            <li><a href="#">{% trans "Shop list" %}</a></li>
-                                            <li><a href="#">{% trans "Shop grid" %}</a></li>
-                                            <li><a href="#">{% trans "Shop detail" %}</a></li>
-                                            <li><a href="#">{% trans "Blog list" %}</a></li>
-                                            <li><a href="#">{% trans "Blog grid" %}</a></li>
-                                            <li><a href="#">{% trans "Blog detail" %}</a></li>
-                                            <li><a href="#">{% trans "404 error" %}</a></li>
-                                            <li><a href="#">{% trans "Coming soon" %}</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+
+    <div class="tg-colhalf">
+        <ul>
+            {% if menu_header_main_right %}
+                {% for item in menu_header_main_right.root_items %}
+                    {% with has_children=item.has_children %}
+                    <li class="{% if has_children %}menu-item-has-children{% endif %} {{ item.css_class }}">
+                        <a href="{{ item.get_url }}"
+                           {% if item.open_in_new_tab %}target="_blank"{% endif %}
+                           {{ item.html_attributes|safe }}>
+                            {% if item.icon_class %}
+                                <i class="{{ item.icon_class }}"></i>
+                            {% endif %}
+                            {{ item.title }}
+                        </a>
+                        {% if has_children %}
+                            <ul class="tg-dropdown-menu">
+                                {% for child in item.children.all %}
+                                    {% if child.is_active %}
+                                        <li class="{{ child.css_class }}">
+                                            <a href="{{ child.get_url }}">{{ child.title }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </li>
+                    {% endwith %}
+                {% endfor %}
+            {% endif %}
+        </ul>
+    </div>
+</div>  {# конец tg-navigation #}
+
                         </div>
                     </nav>
 
