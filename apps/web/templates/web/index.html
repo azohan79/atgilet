@@ -5,6 +5,13 @@
 
 {% block content %}
 
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Home — Soccer" %}{% endblock %}
+
+{% block content %}
+
 <!--************************************
         Home Slider Start
 *************************************-->
@@ -80,44 +87,45 @@
 *************************************-->
 
 <!--************************************
-        About Us Start
+        Main Start (как в оригинале)
 *************************************-->
-<section class="tg-main-section tg-haslayout">
-    <div class="container">
-        <div class="tg-section-name">
-            <h2>{% trans "About pro soccer" %}</h2>
-        </div>
-        <div class="col-sm-11 col-xs-11 pull-right">
-            <div class="row">
-                <div class="tg-aboutussection">
-                    <div class="row">
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <figure>
-                                <img src="{% static 'images/img-01.jpg' %}" alt="">
-                            </figure>
-                        </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12">
-                            <div class="tg-contentbox">
-                                <div class="tg-section-heading">
-                                    <h2>consectetur adipisicing elit sed do eiusmid tempor incididunt labore</h2>
-                                </div>
-                                <div class="tg-description">
-                                    <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt utia labore et dolore magna aliqua enim ad minim veniam quistrud on ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreeu fugiat nulla pariatur cepteur sint occaecat.</p>
-                                </div>
-                                <div class="tg-btnbox">
-                                    <a class="tg-btn" href="#"><span>{% trans "read more" %}</span></a>
+<main id="tg-main" class="tg-main tg-haslayout">
+
+    <!-- About Us Start -->
+    <section class="tg-main-section tg-haslayout">
+        <div class="container">
+            <div class="tg-section-name">
+                <h2>{% trans "About pro soccer" %}</h2>
+            </div>
+            <div class="col-sm-11 col-xs-11 pull-right">
+                <div class="row">
+                    <div class="tg-aboutussection">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <figure>
+                                    <img src="{% static 'images/img-01.jpg' %}" alt="">
+                                </figure>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="tg-contentbox">
+                                    <div class="tg-section-heading">
+                                        <h2>{% trans "consectetur adipisicing elit sed do eiusmid tempor incididunt labore" %}</h2>
+                                    </div>
+                                    <div class="tg-description">
+                                        <p>{% trans "Consectetur adipisicing elit sed do eiusmod tempor incididunt utia labore et dolore magna aliqua enim ad minim veniam quistrud on ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreeu fugiat nulla pariatur cepteur sint occaecat." %}</p>
+                                    </div>
+                                    <div class="tg-btnbox">
+                                        <a class="tg-btn" href="#"><span>{% trans "read more" %}</span></a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div> <!-- row -->
+                        </div> <!-- row -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<!--************************************
-        About Us End
-*************************************-->
+    </section>
+    <!-- About Us End -->
 
 <!--************************************
         Upcoming Match Start
