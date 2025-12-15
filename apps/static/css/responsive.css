@@ -1017,3 +1017,62 @@
 	.tg-authorpic {margin: 133px 15px -30px 0;}
 	.tg-soccermedia-content2 .tg-project figure figcaption {bottom: -21px;}
 }
+
+/* === TEMP MOBILE FIX: show hero on slider (force height) === */
+@media (max-width: 991px) {
+
+  /* Слайдер должен иметь высоту экрана */
+  .tg-sliderbox {
+    height: 100vh !important;
+    min-height: 520px !important;
+    overflow: hidden !important;
+  }
+
+  #tg-home-slider,
+  #tg-home-slider .swiper-wrapper,
+  #tg-home-slider .swiper-slide {
+    height: 100% !important;
+  }
+
+  /* ВАЖНО: в мобильной версии у тебя container схлопывается в 0 */
+  #tg-home-slider .swiper-slide > .container {
+    height: 100% !important;
+    min-height: 520px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative !important;
+    z-index: 5 !important;
+  }
+
+  /* Сам блок с текстом наверх */
+  .tg-slider-content {
+    position: relative !important;
+    z-index: 6 !important;
+    text-align: center !important;
+    padding: 0 16px !important;
+  }
+
+  /* Картинку игрока не даём “выталкивать” разметку */
+  .tg-sliderbox figure.floating {
+    position: absolute !important;
+    top: 10% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 4 !important;
+    max-width: 70vw !important;
+  }
+
+  .tg-sliderbox figure.floating img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 55vh !important;
+    object-fit: contain !important;
+  }
+
+  /* Стрелки по краям — чтобы не перекрывали заголовок */
+  .tg-btn-prev, .tg-btn-next {
+    z-index: 10 !important;
+  }
+}
