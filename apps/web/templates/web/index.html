@@ -734,4 +734,62 @@
 </section>
 </main>
 
+<style>
+/* TEMP: mobile hero visible + prevent container collapse */
+@media (max-width: 767px){
+
+  /* отменяем скрытие игрока из responsive.css */
+  .tg-home-slider .swiper-slide figure.floating{
+    display: block !important;
+  }
+
+  /* делаем слайдер “на экран” */
+  .tg-sliderbox{
+    height: 100vh !important;
+    min-height: 520px !important;
+    overflow: hidden !important;
+  }
+  #tg-home-slider,
+  #tg-home-slider .swiper-wrapper,
+  #tg-home-slider .swiper-slide{
+    height: 100% !important;
+  }
+
+  /* контейнер не должен быть 0px */
+  #tg-home-slider .swiper-slide > .container{
+    min-height: 520px !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  /* чтобы фигура не ломала поток абсолютами на мобилке */
+  .tg-home-slider .swiper-slide figure.floating{
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    padding: 0 !important;
+    margin: 0 0 18px 0 !important;
+    max-width: 72vw !important;
+  }
+
+  .tg-home-slider .swiper-slide figure.floating img{
+    width: 100% !important;
+    height: auto !important;
+    max-height: 45vh !important;
+    object-fit: contain !important;
+  }
+
+  /* текст — в потоке, по центру */
+  .tg-slider-content{
+    position: relative !important;
+    text-align: center !important;
+    padding: 0 16px !important;
+  }
+}
+</style>
+
 {% endblock %}
