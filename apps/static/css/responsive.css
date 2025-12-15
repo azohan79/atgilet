@@ -1018,70 +1018,55 @@
 	.tg-soccermedia-content2 .tg-project figure figcaption {bottom: -21px;}
 }
 
-/* === TEMP: force mobile hero visible === */
-@media (max-width: 991px) {
+@media (max-width: 767px){
 
-  /* Слайдер = высота экрана */
-  .tg-sliderbox {
+  /* отменяем скрытие игрока из оригинальной темы */
+  .tg-home-slider .swiper-slide figure.floating{
+    display: block !important;
+  }
+
+  /* чтобы контейнер не схлопывался и был “экраном” */
+  .tg-sliderbox{
     height: 100vh !important;
     min-height: 520px !important;
     overflow: hidden !important;
   }
-
   #tg-home-slider,
   #tg-home-slider .swiper-wrapper,
-  #tg-home-slider .swiper-slide {
+  #tg-home-slider .swiper-slide{
     height: 100% !important;
   }
 
-  /* КЛЮЧЕВОЕ: container схлопывается — принудительно даём высоту */
-  #tg-home-slider .swiper-slide > .container {
+  /* важное: убираем абсолюты, чтобы контент участвовал в высоте */
+  .tg-home-slider .swiper-slide > .container{
     min-height: 520px !important;
     height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
     align-items: center !important;
+  }
+
+  .tg-home-slider .swiper-slide figure.floating{
     position: relative !important;
-    z-index: 5 !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
+    padding: 0 !important;
+    margin: 0 0 18px 0 !important;
+    max-width: 72vw !important;
   }
 
-  /* Текст поверх */
-  .tg-slider-content {
-    position: relative !important;
-    z-index: 6 !important;
-    text-align: center !important;
-    padding: 0 16px !important;
-  }
-
-  /* Игрок — поверх, не ломает поток */
-  .tg-sliderbox figure.floating {
-    position: absolute !important;
-    top: 8% !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-    z-index: 4 !important;
-    max-width: 70vw !important;
-  }
-
-  .tg-sliderbox figure.floating img {
+  .tg-home-slider .swiper-slide figure.floating img{
     width: 100% !important;
-    max-height: 55vh !important;
+    height: auto !important;
+    max-height: 45vh !important;
     object-fit: contain !important;
   }
 
-  /* Стрелки поверх */
-  .tg-btn-prev,
-  .tg-btn-next {
-    z-index: 10 !important;
-  }
-}
-
-@media (max-width: 991px) {
-  .tg-slider-content,
-  .tg-sliderbox figure.floating {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+  .tg-slider-content{
+    position: relative !important; /* чтобы не выпадал из потока */
+    text-align: center !important;
+    padding: 0 16px !important;
   }
 }
