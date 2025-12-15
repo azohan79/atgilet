@@ -349,7 +349,7 @@
 		padding:10px 0;
 		width:280px;
 		box-shadow:none;
-		background:#373542;
+		background:#013765;
 		position:absolute;
 		top:40px;
 		left:50px;
@@ -1018,10 +1018,10 @@
 	.tg-soccermedia-content2 .tg-project figure figcaption {bottom: -21px;}
 }
 
-/* === TEMP MOBILE FIX: show hero on slider (force height) === */
+/* === TEMP: force mobile hero visible === */
 @media (max-width: 991px) {
 
-  /* Слайдер должен иметь высоту экрана */
+  /* Слайдер = высота экрана */
   .tg-sliderbox {
     height: 100vh !important;
     min-height: 520px !important;
@@ -1034,10 +1034,10 @@
     height: 100% !important;
   }
 
-  /* ВАЖНО: в мобильной версии у тебя container схлопывается в 0 */
+  /* КЛЮЧЕВОЕ: container схлопывается — принудительно даём высоту */
   #tg-home-slider .swiper-slide > .container {
-    height: 100% !important;
     min-height: 520px !important;
+    height: 100% !important;
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important;
@@ -1046,7 +1046,7 @@
     z-index: 5 !important;
   }
 
-  /* Сам блок с текстом наверх */
+  /* Текст поверх */
   .tg-slider-content {
     position: relative !important;
     z-index: 6 !important;
@@ -1054,10 +1054,10 @@
     padding: 0 16px !important;
   }
 
-  /* Картинку игрока не даём “выталкивать” разметку */
+  /* Игрок — поверх, не ломает поток */
   .tg-sliderbox figure.floating {
     position: absolute !important;
-    top: 10% !important;
+    top: 8% !important;
     left: 50% !important;
     transform: translateX(-50%) !important;
     z-index: 4 !important;
@@ -1066,13 +1066,22 @@
 
   .tg-sliderbox figure.floating img {
     width: 100% !important;
-    height: auto !important;
     max-height: 55vh !important;
     object-fit: contain !important;
   }
 
-  /* Стрелки по краям — чтобы не перекрывали заголовок */
-  .tg-btn-prev, .tg-btn-next {
+  /* Стрелки поверх */
+  .tg-btn-prev,
+  .tg-btn-next {
     z-index: 10 !important;
+  }
+}
+
+@media (max-width: 991px) {
+  .tg-slider-content,
+  .tg-sliderbox figure.floating {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
   }
 }
