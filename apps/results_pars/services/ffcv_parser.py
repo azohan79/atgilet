@@ -69,7 +69,10 @@ class FFCVParser:
             # fecha: dd-mm-yyyy, hora: HH:MM
             d, m, y = map(int, fecha["value"].strip().split("-"))
             hh, mm = map(int, hora["value"].strip().split(":"))
-            kickoff_at = datetime(y, m, d, hh, mm)
+            kickoff_at = timezone.make_aware(
+                datetime(y, m, d, hh, mm),
+                timezone.get_current_timezone()
+            )
 
         # venue: первый p.nombre_campo обычно содержит поле
         venue_name = None
@@ -139,18 +142,17 @@ class FFCVParser:
 
             status = "PLAYED" if (home_score is not None and away_score is not None) else "SCHEDULED"
 
-            # Стадион
+            # Стадион (иногда пусто в списке)
             venue_td = tr.select_one("td.estadio")
             venue_name = venue_td.get_text(" ", strip=True) if venue_td else None
 
-            kickoff_at = timezone.make_aware(datetime(y, m, d, hh, mm), timezone.get_current_timezone())
-            venue_name = venue_name  # как было из td.estadio, если есть
+            # дату/время и поле ВСЕГДА берём из partido.php (там есть год)
+            kickoff_at = None
 
-            # добираем детали с partido.php всегда для надёжности (или только если kickoff_at/venue_name пустые)
             partido_url = self.build_partido_url(source_url)
             detail_kickoff, detail_venue = self.fetch_match_detail(partido_url)
 
-            if kickoff_at is None and detail_kickoff:
+            if detail_kickoff:
                 kickoff_at = detail_kickoff
 
             if (not venue_name) and detail_venue:
