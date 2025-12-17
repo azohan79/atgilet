@@ -1,4 +1,5 @@
 from .models import Menu
+from django.utils.translation import get_language
 
 
 def header_footer_menus(request):
@@ -17,7 +18,6 @@ def header_footer_menus(request):
         .prefetch_related("items__children")
     )
 
-    ctx = {}
-    for m in menus:
-        ctx[f"menu_{m.location}"] = m
+    ctx = {f"menu_{m.location}": m for m in menus}
+    ctx["request_lang"] = (get_language() or "es").lower()
     return ctx

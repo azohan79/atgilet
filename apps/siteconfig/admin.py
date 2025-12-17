@@ -19,7 +19,9 @@ class MenuItemInline(admin.TabularInline):
     fk_name = "menu"
     fields = (
         "parent",
-        "title",
+        "title_es",
+        "title_val",
+        "title_en",
         "named_url",
         "url",
         "icon_class",
@@ -41,7 +43,7 @@ class MenuAdmin(admin.ModelAdmin):
 
 @admin.register(MenuItem)
 class MenuItemAdmin(admin.ModelAdmin):
-    list_display = ("title", "menu", "parent", "order", "is_active")
+    list_display = ("title_es", "menu", "parent", "order", "is_active")
     list_filter = ("menu", "is_active")
-    search_fields = ("title", "url", "named_url")
+    search_fields = ("title_es", "title_val", "title_en", "url", "named_url")
     ordering = ("menu", "order")

@@ -1,13 +1,16 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.utils.translation import get_language
 
 
 class SettingsConfig(models.Model):
     maintenance_mode = models.BooleanField(
         "Сайт в разработке",
         default=True,
-        help_text="Если включено, всем пользователям показывается страница "
-                  "'сайт в разработке', кроме администраторов.",
+        help_text=(
+            "Если включено, всем пользователям показывается страница "
+            "'сайт в разработке', кроме администраторов."
+        ),
     )
 
     def __str__(self):
@@ -81,7 +84,10 @@ class MenuItem(models.Model):
         verbose_name="Родительский пункт",
     )
 
-    title = models.CharField("Заголовок", max_length=200)
+    # Мультиязычные заголовки (ES основной)
+    title_es = models.CharField("Заголовок (ES)", max_length=200)
+    title_val = models.CharField("Заголовок (VAL)", max_length=200, blank=True, default="")
+    title_en = models.CharField("Заголовок (EN)", max_length=200, blank=True, default="")
 
     # URL: либо имя роута, либо явный путь
     named_url = models.CharField(
@@ -112,8 +118,10 @@ class MenuItem(models.Model):
     html_attributes = models.TextField(
         "Доп. HTML-атрибуты",
         blank=True,
-        help_text='Например: data-toggle="modal" data-target="#tg-login". '
-                  "Выводится как есть в теге <a>.",
+        help_text=(
+            'Например: data-toggle="modal" data-target="#tg-login". '
+            "Выводится как есть в теге <a>."
+        ),
     )
 
     open_in_new_tab = models.BooleanField("Открывать в новой вкладке", default=False)
@@ -126,19 +134,39 @@ class MenuItem(models.Model):
         verbose_name_plural = "пункты меню"
 
     def __str__(self):
-        return self.title
+        # чтобы в админке/логах было понятно даже при пустых VAL/EN
+        return self.title_es
 
-    def get_url(self):
+    def get_title(self, lang_code: str | None = None) -> str:
+        """
+        Возвращает заголовок по текущему языку сайта.
+        Поддержка: es (base), val, en.
+        Fallback: всегда на ES, если перевод пустой.
+        """
+        lang = (lang_code or get_language() or "es").lower()
+
+        if lang.startswith("val"):
+            return self.title_val or self.title_es
+        if lang.startswith("en"):
+            return self.title_en or self.title_es
+        return self.title_es
+
+    @property
+    def title(self) -> str:
+        """Удобно для шаблонов: {{ item.title }}"""
+        return self.get_title()
+
+    def get_url(self) -> str:
         from django.urls import reverse, NoReverseMatch
 
         if self.named_url:
             try:
                 return reverse(self.named_url)
             except NoReverseMatch:
+                # оставляем fallback, чтобы не падало в шаблонах
                 pass
         return self.url or "#"
 
     @property
-    def has_children(self):
+    def has_children(self) -> bool:
         return self.children.filter(is_active=True).exists()
-
