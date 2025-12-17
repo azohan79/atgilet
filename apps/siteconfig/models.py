@@ -58,7 +58,7 @@ class Menu(models.Model):
         verbose_name_plural = "меню"
 
     def __str__(self):
-        return self.name
+        return self.title_es or self.title_val or self.title_en or (self.icon_class and f"[{self.icon_class}]") or self.get_url()
 
     @property
     def root_items(self):
@@ -85,7 +85,7 @@ class MenuItem(models.Model):
     )
 
     # Мультиязычные заголовки (ES основной)
-    title_es = models.CharField("Заголовок (ES)", max_length=200)
+    title_es = models.CharField("Заголовок (ES)", max_length=200, blank=True, default="")
     title_val = models.CharField("Заголовок (VAL)", max_length=200, blank=True, default="")
     title_en = models.CharField("Заголовок (EN)", max_length=200, blank=True, default="")
 
