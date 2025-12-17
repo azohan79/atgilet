@@ -13,74 +13,58 @@
 				<img src="{% static 'images/bg-pattran.png'%}" alt="image desctription">
 			</div>
 			<div id="tg-home-slider" class="tg-home-slider tg-haslayout">
-				<div class="swiper-wrapper">
+                <div class="swiper-wrapper">
 
-                          {% for slide in slides %}
-                            {% with
-                            t1=slide.title_part1|default:home_cfg.hero_title_part1
-                            t2=slide.title_part2|default:home_cfg.hero_title_part2
-                            sub=slide.subtitle|default:home_cfg.hero_subtitle
-                            b1_text=slide.btn1_text|default:home_cfg.hero_btn1_text
-                            b1_url=slide.btn1_url|default:home_cfg.hero_btn1_url
-                            b2_text=slide.btn2_text|default:home_cfg.hero_btn2_text
-                            b2_url=slide.btn2_url|default:home_cfg.hero_btn2_url
-                            %}
+                {% for slide in slides %}
+                    {% with
+                    t1=slide.title_part1|default:home_cfg.hero_title_part1
+                    t2=slide.title_part2|default:home_cfg.hero_title_part2
+                    sub=slide.subtitle|default:home_cfg.hero_subtitle
+                    b1_text=slide.btn1_text|default:home_cfg.hero_btn1_text
+                    b1_url=slide.btn1_url|default:home_cfg.hero_btn1_url
+                    b2_text=slide.btn2_text|default:home_cfg.hero_btn2_text
+                    b2_url=slide.btn2_url|default:home_cfg.hero_btn2_url
+                    %}
 
-					<div class="swiper-slide">
-						<div class="container">
+                    <div class="swiper-slide">
+                    <div class="container">
 
+                        <figure class="floating">
+                        {% if slide.hero_image %}
+                            <img src="{{ slide.hero_image.url }}" alt="">
+                        {% else %}
+                            <img src="{% static 'images/slider/img-01.png' %}" alt="">
+                        {% endif %}
+                        </figure>
 
-                            <figure class="floating">
-                            {% if slide.hero_image %}
-                                <img src="{{ slide.hero_image.url }}" alt="">
-                            {% else %}
-                                <img src="{% static 'images/slider/img-01.png' %}" alt="">
+                        <div class="tg-slider-content">
+                        <h1>
+                            {% if t1 %}{{ t1 }}{% else %}{% blocktrans %}Gilet es otra{% endblocktrans %}{% endif %}
+                            <span>
+                            {% if t2 %}{{ t2 }}{% else %}{% blocktrans %}Historia{% endblocktrans %}{% endif %}
+                            </span>
+                        </h1>
+
+                        <div class="tg-btnbox">
+                            <h2>
+                            {% if sub %}{{ sub }}{% else %}{% blocktrans %}Fundado en 1933{% endblocktrans %}{% endif %}
+                            </h2>
+
+                            {% if b1_text and b1_url %}
+                            <a class="tg-btn" href="{{ b1_url }}"><span>{{ b1_text }}</span></a>
                             {% endif %}
-                            </figure>
 
-
-                            <div class="tg-slider-content">
-                                <h1>
-                                    {% if t1 %}
-                                    {{ t1 }}
-                                    {% else %}
-                                    {% blocktrans %}Gilet es otra{% endblocktrans %}
-                                    {% endif %}
-
-                                    <span>
-                                    {% if t2 %}
-                                        {{ t2 }}
-                                    {% else %}
-                                        {% blocktrans %}Historia{% endblocktrans %}
-                                    {% endif %}
-                                    </span>
-                                </h1>
-
-                                <div class="tg-btnbox">
-                                    <h2>
-                                    {% if sub %}
-                                        {{ sub }}
-                                    {% else %}
-                                        {% blocktrans %}Fundado en 1933{% endblocktrans %}
-                                    {% endif %}
-                                    </h2>
-
-                                    {% if b1_text and b1_url %}
-                                    <a class="tg-btn" href="{{ b1_url }}"><span>{{ b1_text }}</span></a>
-                                    {% endif %}
-
-                                    {% if b2_text and b2_url %}
-                                    <a class="tg-btn" href="{{ b2_url }}"><span>{{ b2_text }}</span></a>
-                                    {% endif %}
-                                </div>
-                            </div>
-
+                            {% if b2_text and b2_url %}
+                            <a class="tg-btn" href="{{ b2_url }}"><span>{{ b2_text }}</span></a>
+                            {% endif %}
                         </div>
+                        </div>
+
+                    </div>
                     </div>
 
-                        {% endwith %}
-                    {% empty %}
-
+                    {% endwith %}
+                {% empty %}
 
                     <div class="swiper-slide">
                     <div class="container">
@@ -98,6 +82,7 @@
                         </div>
                     </div>
                     </div>
+
                 {% endfor %}
 
                 </div>
