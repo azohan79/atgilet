@@ -1,11 +1,11 @@
-# apps/results_pars/services/ffcv_parser.py
+# results_pars/services/ffcv_parser.py
 from __future__ import annotations
 
 import re
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Optional, List, Dict, Any
-from urllib.parse import urljoin
+from typing import Optional, List
+from urllib.parse import urljoin, urlparse, parse_qs
 
 import requests
 from bs4 import BeautifulSoup
@@ -33,7 +33,7 @@ class ParsedMatch:
 
 
 class FFCVParser:
-    USER_AGENT = "ATGiletBot/1.0 (+results_pars; contact: admin)"
+    USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36"
 
     def __init__(self, base_url: str, team_matches_url_template: str, target_team_id: str, target_team_name: str):
         self.base_url = base_url.rstrip("/")
@@ -55,35 +55,96 @@ class FFCVParser:
         html = self.fetch(url)
         soup = BeautifulSoup(html, "html.parser")
 
-        # Варианты структур отличаются; ищем таблицы матчей по наличию команд/счёта/даты
-        tables = soup.find_all("table")
+        table = soup.select_one("table.sobrestante")
+        if not table:
+            return []
+
+        current_date = None  # текстовая дата (isquad), дату в datetime соберём позже при наличии года
         parsed: List[ParsedMatch] = []
 
-        for tbl in tables:
-            rows = tbl.find_all("tr")
-            if len(rows) < 2:
+        for tr in table.select("tbody > tr"):
+            # Строка-разделитель даты
+            fecha = tr.select_one("div.fecha")
+            if fecha:
+                current_date = fecha.get_text(" ", strip=True)
                 continue
 
-            for tr in rows[1:]:
-                cols = [c.get_text(" ", strip=True) for c in tr.find_all(["td", "th"])]
-                if len(cols) < 4:
-                    continue
+            tds = tr.find_all("td")
+            if len(tds) < 5:
+                continue
 
-                # Очень приблизительное определение строки матча:
-                # пытаемся найти "home - away" и/или счёт "x - y"
-                row_text = " ".join(cols)
-                if "-" not in row_text:
-                    continue
+            # Команды: обычно 1-й и 5-й td с классом td_nombre_partidos
+            home_a = tds[0].find("a")
+            away_a = tds[4].find("a")
+            if not home_a or not away_a:
+                continue
 
-                pm = self._parse_match_row(tr, base_page_url=url)
-                if not pm:
-                    continue
+            home_name = home_a.get_text(" ", strip=True)
+            away_name = away_a.get_text(" ", strip=True)
 
-                # Scope limitation: только матчи с целевой командой
-                if not self._is_target_match(pm.home_name, pm.away_name):
-                    continue
+            # Ссылка на матч и id_partido
+            match_a = tr.select_one("a[href*='partido_estadisticas.php']")
+            if not match_a:
+                continue
+            href = match_a.get("href")
+            source_url = urljoin(self.base_url + "/", href)
 
-                parsed.append(pm)
+            id_partido = self._extract_query_param(source_url, "id_partido")
+            if not id_partido:
+                # fallback: из href без домена
+                id_partido = self._extract_query_param(urljoin(self.base_url + "/", href), "id_partido")
+            if not id_partido:
+                continue
+
+            # Время / маркер (может быть hora_marcador или marcador)
+            hora_span = tr.select_one("span.hora_marcador")
+            time_text = hora_span.get_text(" ", strip=True) if hora_span else None
+
+            # Счёт (если сыгран): иногда отдельный span, подхватим общим regex по строке tr
+            tr_text = tr.get_text(" ", strip=True)
+            m_score = re.search(r"(\d+)\s*-\s*(\d+)", tr_text)
+            home_score = int(m_score.group(1)) if m_score else None
+            away_score = int(m_score.group(2)) if m_score else None
+
+            status = "PLAYED" if (home_score is not None and away_score is not None) else "SCHEDULED"
+
+            # Стадион
+            venue_td = tr.select_one("td.estadio")
+            venue_name = venue_td.get_text(" ", strip=True) if venue_td else None
+
+            kickoff_at = self._build_kickoff_datetime(current_date, time_text)
+
+            # Jornada иногда есть в URL исходной страницы как jornada=...
+            round_number = self._extract_query_param(url, "jornada")
+            round_number = int(round_number) if round_number and round_number.isdigit() else None
+
+            # Контекст можно пока автогенерить (позже сделаем точнее из заголовка страницы)
+            competition_name = "FFCV (isquad)"
+            season_name = None
+
+            external_key = f"isquad:{id_partido}"
+
+            # Фильтр на целевую команду (на всякий случай)
+            if not self._is_target_match(home_name, away_name):
+                continue
+
+            parsed.append(
+                ParsedMatch(
+                    external_key=external_key,
+                    source_url=source_url,
+                    competition_name=competition_name,
+                    season_name=season_name,
+                    round_number=round_number,
+                    kickoff_at=kickoff_at,
+                    home_name=home_name,
+                    away_name=away_name,
+                    home_score=home_score,
+                    away_score=away_score,
+                    status=status,
+                    result_note=None,
+                    venue_name=venue_name,
+                )
+            )
 
         return parsed
 
@@ -91,92 +152,45 @@ class FFCVParser:
         t = self.target_team_name.lower()
         return t in home.lower() or t in away.lower()
 
-    def _parse_match_row(self, tr, base_page_url: str) -> Optional[ParsedMatch]:
-        # Пытаемся извлечь ссылку на матч/контекст (если есть)
-        a = tr.find("a", href=True)
-        source_url = urljoin(self.base_url + "/", a["href"]) if a else base_page_url
-
-        text = tr.get_text(" ", strip=True)
-
-        # Команды: часто встречается "HOME - AWAY"
-        m_teams = re.search(r"(.+?)\s*-\s*(.+?)\s+(?:\d+\s*-\s*\d+|$)", text)
-        if not m_teams:
-            # fallback: берём первые 2 “крупных” токена по разметке
+    def _extract_query_param(self, url: str, key: str) -> Optional[str]:
+        try:
+            qs = parse_qs(urlparse(url).query)
+            v = qs.get(key)
+            return v[0] if v else None
+        except Exception:
             return None
-        home_name = m_teams.group(1).strip()
-        away_name = m_teams.group(2).strip()
 
-        # Счёт
-        m_score = re.search(r"(\d+)\s*-\s*(\d+)", text)
-        home_score = int(m_score.group(1)) if m_score else None
-        away_score = int(m_score.group(2)) if m_score else None
+    def _build_kickoff_datetime(self, date_text: Optional[str], time_text: Optional[str]) -> Optional[datetime]:
+        """
+        isquad даёт дату без года: 'miércoles, 31 De diciembre'
+        и время: '12:00'
+        Год лучше брать из id_temp/сезона, но для первого запуска:
+        - если год не определён, вернём None (чтобы не ломать данные).
+        Позже сделаем маппинг id_temp -> сезонный год.
+        """
+        if not date_text or not time_text:
+            return None
 
-        # Статус
-        if home_score is not None and away_score is not None:
-            status = "PLAYED"
-        else:
-            # эвристики по словам
-            lowered = text.lower()
-            if "aplaz" in lowered or "suspend" in lowered:
-                status = "POSTPONED"
-            elif "anul" in lowered or "cancel" in lowered:
-                status = "CANCELLED"
-            else:
-                status = "SCHEDULED"
-
-        # Дата/время (очень зависит от формата FFCV)
-        kickoff_at = self._extract_datetime(text)
-
-        # Jornada
-        round_number = self._extract_round(text)
-
-        # Competition/season: чаще в шапке страницы, но можно оставить UNKNOWN и дообогатить позже
-        competition_name = self._extract_competition_name_fallback()
-        season_name = None
-
-        venue_name = self._extract_venue(text)
-        result_note = None
-
-        external_key = self._make_external_key(source_url, home_name, away_name, kickoff_at, round_number)
-
-        return ParsedMatch(
-            external_key=external_key,
-            source_url=source_url,
-            competition_name=competition_name,
-            season_name=season_name,
-            round_number=round_number,
-            kickoff_at=kickoff_at,
-            home_name=home_name,
-            away_name=away_name,
-            home_score=home_score,
-            away_score=away_score,
-            status=status,
-            result_note=result_note,
-            venue_name=venue_name,
-        )
-
-    def _extract_datetime(self, text: str) -> Optional[datetime]:
-        # Примеры возможны: "14/12/2025 18:00" или "14-12-2025 18:00"
-        m = re.search(r"(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4}).*?(\d{1,2}):(\d{2})", text)
+        # извлекаем день и месяц (исп. 'De diciembre' и т.п.)
+        m = re.search(r"(\d{1,2})\s+De\s+([A-Za-záéíóúñ]+)", date_text, flags=re.IGNORECASE)
         if not m:
             return None
-        d, mo, y, hh, mm = map(int, m.groups())
-        return datetime(y, mo, d, hh, mm)
+        day = int(m.group(1))
+        month_name = m.group(2).lower()
 
-    def _extract_round(self, text: str) -> Optional[int]:
-        m = re.search(r"Jornada\s*(\d+)", text, flags=re.IGNORECASE)
-        return int(m.group(1)) if m else None
+        month_map = {
+            "enero": 1, "febrero": 2, "marzo": 3, "abril": 4, "mayo": 5, "junio": 6,
+            "julio": 7, "agosto": 8, "septiembre": 9, "setiembre": 9, "octubre": 10,
+            "noviembre": 11, "diciembre": 12,
+        }
+        month = month_map.get(month_name)
+        if not month:
+            return None
 
-    def _extract_venue(self, text: str) -> Optional[str]:
-        # Если есть шаблон "Campo:" или "Pabellón:" — подхватить
-        m = re.search(r"(?:Campo|Pabell[oó]n|Instalaci[oó]n)\s*:\s*([^|]+)$", text, flags=re.IGNORECASE)
-        return m.group(1).strip() if m else None
+        tm = re.search(r"(\d{1,2}):(\d{2})", time_text)
+        if not tm:
+            return None
+        hh, mm = int(tm.group(1)), int(tm.group(2))
 
-    def _extract_competition_name_fallback(self) -> str:
-        return "FFCV Competition (auto)"
-
-    def _make_external_key(self, source_url: str, home: str, away: str, kickoff_at: Optional[datetime], round_number: Optional[int]) -> str:
-        dt = kickoff_at.strftime("%Y%m%d%H%M") if kickoff_at else "nodt"
-        rnd = str(round_number) if round_number is not None else "nornd"
-        core = f"{home}|{away}|{dt}|{rnd}|{source_url}"
-        return re.sub(r"\s+", " ", core).strip()
+        # Временно: без года (вернём None). Если хочешь — поставим год сезона вручную в конфиге.
+        return None
