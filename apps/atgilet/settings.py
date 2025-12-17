@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'maintenance',
     'web',
     'siteconfig',
+    'apps.results_pars',
+
 ]
 
 MIDDLEWARE = [
