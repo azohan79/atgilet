@@ -5,7 +5,7 @@ import re
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional, List
-from urllib.parse import urljoin, urlparse, parse_qs
+from urllib.parse import urlparse, parse_qs, urlencode, urljoin
 
 import requests
 from bs4 import BeautifulSoup
@@ -49,6 +49,36 @@ class FFCVParser:
         r = requests.get(url, headers={"User-Agent": self.USER_AGENT}, timeout=30)
         r.raise_for_status()
         return r.text
+    
+    def build_partido_url(self, any_match_url: str) -> str:
+        qs = parse_qs(urlparse(any_match_url).query)
+        flat = {k: v[0] for k, v in qs.items() if v}
+        return urljoin(self.base_url + "/", "partido.php?" + urlencode(flat))
+
+
+    def fetch_match_detail(self, partido_url: str) -> tuple[Optional[datetime], Optional[str]]:
+        html = self.fetch(partido_url)
+        soup = BeautifulSoup(html, "html.parser")
+
+        fecha = soup.select_one("input#fecha")
+        hora = soup.select_one("input#hora")
+
+        kickoff_at = None
+        if fecha and hora and fecha.get("value") and hora.get("value"):
+            # fecha: dd-mm-yyyy, hora: HH:MM
+            d, m, y = map(int, fecha["value"].strip().split("-"))
+            hh, mm = map(int, hora["value"].strip().split(":"))
+            kickoff_at = datetime(y, m, d, hh, mm)
+
+        # venue: первый p.nombre_campo обычно содержит поле
+        venue_name = None
+        ps = soup.select("p.nombre_campo")
+        if ps:
+            # берём первый, режем хвостовой |
+            v = ps[0].get_text(" ", strip=True)
+            venue_name = v.replace("|", "").strip() or None
+
+        return kickoff_at, venue_name
 
     def parse_team_matches(self) -> List[ParsedMatch]:
         url = self.build_team_matches_url()
@@ -113,6 +143,17 @@ class FFCVParser:
             venue_name = venue_td.get_text(" ", strip=True) if venue_td else None
 
             kickoff_at = self._build_kickoff_datetime(current_date, time_text)
+            venue_name = venue_name  # как было из td.estadio, если есть
+
+            # добираем детали с partido.php всегда для надёжности (или только если kickoff_at/venue_name пустые)
+            partido_url = self.build_partido_url(source_url)
+            detail_kickoff, detail_venue = self.fetch_match_detail(partido_url)
+
+            if kickoff_at is None and detail_kickoff:
+                kickoff_at = detail_kickoff
+
+            if (not venue_name) and detail_venue:
+                venue_name = detail_venue
 
             # Jornada иногда есть в URL исходной страницы как jornada=...
             round_number = self._extract_query_param(url, "jornada")
