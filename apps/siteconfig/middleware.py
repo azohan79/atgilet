@@ -6,8 +6,9 @@ DEFAULT = settings.LANGUAGE_CODE
 
 class ForceDefaultLanguageMiddleware:
     """
-    Если язык не выбран пользователем (нет cookie django_language),
-    то принудительно используем LANGUAGE_CODE (у вас 'es').
+    Если пользователь явно не выбирал язык (нет cookie django_language),
+    то принудительно используем DEFAULT (у вас 'es'),
+    даже если LocaleMiddleware выбрал другой по Accept-Language.
     """
     def __init__(self, get_response):
         self.get_response = get_response
@@ -19,6 +20,4 @@ class ForceDefaultLanguageMiddleware:
             translation.activate(DEFAULT)
             request.LANGUAGE_CODE = DEFAULT
 
-        response = self.get_response(request)
-        translation.deactivate()
-        return response
+        return self.get_response(request)
