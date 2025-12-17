@@ -6,6 +6,16 @@ class HomePage(models.Model):
     Держим 1 запись (id=1), правим в админке.
     """
     title = models.CharField(max_length=200, default="Home", blank=True)
+    
+    # Блок 1 — Слайдер (общие тексты/кнопки по умолчанию)
+    hero_title_part1 = models.CharField(max_length=120, blank=True)
+    hero_title_part2 = models.CharField(max_length=120, blank=True)
+    hero_subtitle = models.CharField(max_length=200, blank=True)
+
+    hero_btn1_text = models.CharField(max_length=60, blank=True)
+    hero_btn1_url = models.CharField(max_length=300, blank=True)
+    hero_btn2_text = models.CharField(max_length=60, blank=True)
+    hero_btn2_url = models.CharField(max_length=300, blank=True)
 
     # Блок 2 (о клубе)
     about_vertical_title = models.CharField(max_length=120, blank=True)
