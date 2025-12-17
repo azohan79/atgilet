@@ -9,6 +9,7 @@ from urllib.parse import urlparse, parse_qs, urlencode, urljoin
 
 import requests
 from bs4 import BeautifulSoup
+from django.utils import timezone
 
 
 @dataclass
@@ -142,7 +143,7 @@ class FFCVParser:
             venue_td = tr.select_one("td.estadio")
             venue_name = venue_td.get_text(" ", strip=True) if venue_td else None
 
-            kickoff_at = self._build_kickoff_datetime(current_date, time_text)
+            kickoff_at = timezone.make_aware(datetime(y, m, d, hh, mm), timezone.get_current_timezone())
             venue_name = venue_name  # как было из td.estadio, если есть
 
             # добираем детали с partido.php всегда для надёжности (или только если kickoff_at/venue_name пустые)
