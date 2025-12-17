@@ -3,10 +3,10 @@ from django.core.management.base import BaseCommand
 from django.db import transaction
 from django.utils import timezone
 
-from apps.results_pars.models import (
+from results_pars.models import (
     TargetConfig, Team, CompetitionContext, Round, Venue, Match, IngestionRun
 )
-from apps.results_pars.services.ffcv_parser import FFCVParser
+from results_pars.services.ffcv_parser import FFCVParser
 
 
 class Command(BaseCommand):
