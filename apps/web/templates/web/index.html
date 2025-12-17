@@ -16,37 +16,48 @@
   <div id="tg-home-slider" class="tg-home-slider tg-haslayout">
     <div class="swiper-wrapper">
 
-      {% if slides %}
-        {% for slide in slides %}
+      {% for slide in slides %}
+        {% with
+          title1=slide.title_part1|default:home_cfg.hero_title_part1|default:"Gilet es otra"
+          title2=slide.title_part2|default:home_cfg.hero_title_part2|default:"historia"
+          subtitle=slide.subtitle|default:home_cfg.hero_subtitle|default:"Fundado en 1933"
+          hero_img=slide.hero_image
+          b1_text=slide.btn1_text|default:home_cfg.hero_btn1_text|default:"historia del club"
+          b1_url=slide.btn1_url|default:home_cfg.hero_btn1_url|default:"#"
+          b2_text=slide.btn2_text|default:home_cfg.hero_btn2_text|default:"resultados"
+          b2_url=slide.btn2_url|default:home_cfg.hero_btn2_url|default:"#"
+        %}
           <div class="swiper-slide">
             <div class="container">
 
-              <figure class="floating">
-                {% if slide.hero_image %}
-                  <img src="{{ slide.hero_image.url }}" alt="">
-                {% else %}
+              {% if hero_img %}
+                <figure class="floating">
+                  <img src="{{ hero_img.url }}" alt="">
+                </figure>
+              {% else %}
+                <figure class="floating">
                   <img src="{% static 'images/slider/img-01.png' %}" alt="">
-                {% endif %}
-              </figure>
+                </figure>
+              {% endif %}
 
               <div class="tg-slider-content">
                 <h1>
-                  {{ slide.title_part1|default:_("Gilet es otra") }}
-                  <span>{{ slide.title_part2|default:_("historia") }}</span>
+                  {% blocktrans with t1=title1 %}{{ t1 }}{% endblocktrans %}
+                  <span>{% blocktrans with t2=title2 %}{{ t2 }}{% endblocktrans %}</span>
                 </h1>
 
                 <div class="tg-btnbox">
-                  <h2>{{ slide.subtitle|default:_("Fundado en 1933") }}</h2>
+                  <h2>{% blocktrans with st=subtitle %}{{ st }}{% endblocktrans %}</h2>
 
-                  {% if slide.btn1_text and slide.btn1_url %}
-                    <a class="tg-btn" href="{{ slide.btn1_url }}">
-                      <span>{{ slide.btn1_text }}</span>
+                  {% if b1_text and b1_url %}
+                    <a class="tg-btn" href="{{ b1_url }}">
+                      <span>{% blocktrans with bt=b1_text %}{{ bt }}{% endblocktrans %}</span>
                     </a>
                   {% endif %}
 
-                  {% if slide.btn2_text and slide.btn2_url %}
-                    <a class="tg-btn" href="{{ slide.btn2_url }}">
-                      <span>{{ slide.btn2_text }}</span>
+                  {% if b2_text and b2_url %}
+                    <a class="tg-btn" href="{{ b2_url }}">
+                      <span>{% blocktrans with bt=b2_text %}{{ bt }}{% endblocktrans %}</span>
                     </a>
                   {% endif %}
                 </div>
@@ -54,25 +65,28 @@
 
             </div>
           </div>
-        {% endfor %}
-      {% else %}
-        {# fallback если в админке ещё нет слайдов #}
+        {% endwith %}
+      {% empty %}
+        {# если слайды ещё не созданы в админке — покажем 1 дефолтный #}
         <div class="swiper-slide">
           <div class="container">
             <figure class="floating">
               <img src="{% static 'images/slider/img-01.png' %}" alt="">
             </figure>
             <div class="tg-slider-content">
-              <h1>{% trans "Gilet es otra" %} <span>{% trans "historia" %}</span></h1>
+              <h1>
+                {% blocktrans %}Gilet es otra{% endblocktrans %}
+                <span>{% blocktrans %}historia{% endblocktrans %}</span>
+              </h1>
               <div class="tg-btnbox">
-                <h2>{% trans "Fundado en 1933" %}</h2>
-                <a class="tg-btn" href="#"><span>{% trans "historia del club" %}</span></a>
-                <a class="tg-btn" href="#"><span>{% trans "resultados" %}</span></a>
+                <h2>{% blocktrans %}Fundado en 1933{% endblocktrans %}</h2>
+                <a class="tg-btn" href="#"><span>{% blocktrans %}historia del club{% endblocktrans %}</span></a>
+                <a class="tg-btn" href="#"><span>{% blocktrans %}resultados{% endblocktrans %}</span></a>
               </div>
             </div>
           </div>
         </div>
-      {% endif %}
+      {% endfor %}
 
     </div>
 
