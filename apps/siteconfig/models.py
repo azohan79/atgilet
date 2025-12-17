@@ -58,7 +58,7 @@ class Menu(models.Model):
         verbose_name_plural = "меню"
 
     def __str__(self):
-        return self.title_es or self.title_val or self.title_en or (self.icon_class and f"[{self.icon_class}]") or self.get_url()
+        return self.name
 
     @property
     def root_items(self):
@@ -134,8 +134,13 @@ class MenuItem(models.Model):
         verbose_name_plural = "пункты меню"
 
     def __str__(self):
-        # чтобы в админке/логах было понятно даже при пустых VAL/EN
-        return self.title_es
+        return (
+            self.title_es
+            or self.title_val
+            or self.title_en
+            or (self.icon_class and f"[{self.icon_class}]")
+            or self.get_url()
+        )
 
     def get_title(self, lang_code: str | None = None) -> str:
         """
