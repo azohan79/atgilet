@@ -9,71 +9,82 @@
         Home Slider Start
 *************************************-->
 <div class="tg-sliderbox">
-    <div class="tg-imglayer">
-        <img src="{% static 'images/bg-pattran.png' %}" alt="">
+  <div class="tg-imglayer">
+    <img src="{% static 'images/bg-pattran.png' %}" alt="">
+  </div>
+
+  <div id="tg-home-slider" class="tg-home-slider tg-haslayout">
+    <div class="swiper-wrapper">
+
+      {% if slides %}
+        {% for slide in slides %}
+          <div class="swiper-slide">
+            <div class="container">
+
+              <figure class="floating">
+                {% if slide.hero_image %}
+                  <img src="{{ slide.hero_image.url }}" alt="">
+                {% else %}
+                  <img src="{% static 'images/slider/img-01.png' %}" alt="">
+                {% endif %}
+              </figure>
+
+              <div class="tg-slider-content">
+                <h1>
+                  {{ slide.title_part1|default:_("Gilet es otra") }}
+                  <span>{{ slide.title_part2|default:_("historia") }}</span>
+                </h1>
+
+                <div class="tg-btnbox">
+                  <h2>{{ slide.subtitle|default:_("Fundado en 1933") }}</h2>
+
+                  {% if slide.btn1_text and slide.btn1_url %}
+                    <a class="tg-btn" href="{{ slide.btn1_url }}">
+                      <span>{{ slide.btn1_text }}</span>
+                    </a>
+                  {% endif %}
+
+                  {% if slide.btn2_text and slide.btn2_url %}
+                    <a class="tg-btn" href="{{ slide.btn2_url }}">
+                      <span>{{ slide.btn2_text }}</span>
+                    </a>
+                  {% endif %}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        {% endfor %}
+      {% else %}
+        {# fallback если в админке ещё нет слайдов #}
+        <div class="swiper-slide">
+          <div class="container">
+            <figure class="floating">
+              <img src="{% static 'images/slider/img-01.png' %}" alt="">
+            </figure>
+            <div class="tg-slider-content">
+              <h1>{% trans "Gilet es otra" %} <span>{% trans "historia" %}</span></h1>
+              <div class="tg-btnbox">
+                <h2>{% trans "Fundado en 1933" %}</h2>
+                <a class="tg-btn" href="#"><span>{% trans "historia del club" %}</span></a>
+                <a class="tg-btn" href="#"><span>{% trans "resultados" %}</span></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+
     </div>
-    <div id="tg-home-slider" class="tg-home-slider tg-haslayout">
-        <div class="swiper-wrapper">
 
-            <div class="swiper-slide">
-                <div class="container">
-                    <figure class="floating">
-                        <img src="{% static 'images/slider/img-01.png' %}" alt="">
-                    </figure>
-                    <div class="tg-slider-content">
-                        <h1>{% trans "Gilet es otra" %} <span>{% trans "historia" %}</span></h1>
-                        <div class="tg-btnbox">
-                            <h2>{% trans "Fundado en 1933" %}</h2>
-                            <a class="tg-btn" href="#"><span>{% trans "historia del club" %}</span></a>
-                            <a class="tg-btn" href="#"><span>{% trans "resultados" %}</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-slide">
-                <div class="container">
-                    <figure class="floating">
-                        <img src="{% static 'images/slider/img-01.png' %}" alt="">
-                    </figure>
-                    <div class="tg-slider-content">
-                        <h1>{% trans "Gilet es otra" %} <span>{% trans "historia" %}</span></h1>
-                        <div class="tg-btnbox">
-                            <h2>{% trans "Fundado en 1933" %}</h2>
-                            <a class="tg-btn" href="#"><span>{% trans "historia del club" %}</span></a>
-                            <a class="tg-btn" href="#"><span>{% trans "resultados" %}</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-slide">
-                <div class="container">
-                    <figure class="floating">
-                        <img src="{% static 'images/slider/img-01.png' %}" alt="">
-                    </figure>
-                    <div class="tg-slider-content">
-                        <h1>{% trans "Gilet es otra" %} <span>{% trans "historia" %}</span></h1>
-                        <div class="tg-btnbox">
-                            <h2>{% trans "Fundado en 1933" %}</h2>
-                            <a class="tg-btn" href="#"><span>{% trans "historia del club" %}</span></a>
-                            <a class="tg-btn" href="#"><span>{% trans "resultados" %}</span></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="tg-btn-next">
-            <span>{% trans "siguiente" %}</span>
-            <span class="fa fa-angle-down"></span>
-        </div>
-        <div class="tg-btn-prev">
-            <span>{% trans "anterior" %}</span>
-            <span class="fa fa-angle-down"></span>
-        </div>
+    <div class="tg-btn-next">
+      <span>{% trans "siguiente" %}</span>
+      <span class="fa fa-angle-down"></span>
     </div>
+    <div class="tg-btn-prev">
+      <span>{% trans "anterior" %}</span>
+      <span class="fa fa-angle-down"></span>
+    </div>
+  </div>
 </div>
 <!--************************************
         Home Slider End
