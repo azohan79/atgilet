@@ -97,9 +97,11 @@
 
     <div class="tg-section-name">
       <h2>
-        {% blocktrans with title=home_cfg.about_vertical_title %}
-          {{ title|default:"About pro soccer" }}
-        {% endblocktrans %}
+        {% if home_cfg.about_vertical_title %}
+          {{ home_cfg.about_vertical_title }}
+        {% else %}
+          {% blocktrans %}About pro soccer{% endblocktrans %}
+        {% endif %}
       </h2>
     </div>
 
@@ -119,31 +121,41 @@
 
                 <div class="tg-section-heading">
                   <h2>
-                    {% blocktrans with title=home_cfg.about_title %}
-                      {{ title|default:"consectetur adipisicing elit sed do eiusmid tempor incididunt labore" }}
-                    {% endblocktrans %}
+                    {% if home_cfg.about_title %}
+                      {{ home_cfg.about_title }}
+                    {% else %}
+                      {% blocktrans %}consectetur adipisicing elit sed do eiusmid tempor incididunt labore{% endblocktrans %}
+                    {% endif %}
                   </h2>
                 </div>
 
                 <div class="tg-description">
                   <p>
-                    {% blocktrans with text=home_cfg.about_text %}
-                      {{ text|default:"Consectetur adipisicing elit sed do eiusmod tempor incididunt utia labore et dolore magna aliqua enim ad minim veniam quistrud on ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreeu fugiat nulla pariatur cepteur sint occaecat." }}
-                    {% endblocktrans %}
+                    {% if home_cfg.about_text %}
+                      {{ home_cfg.about_text }}
+                    {% else %}
+                      {% blocktrans %}Consectetur adipisicing elit sed do eiusmod tempor incididunt utia labore et dolore magna aliqua enim ad minim veniam quistrud on ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreeu fugiat nulla pariatur cepteur sint occaecat.{% endblocktrans %}
+                    {% endif %}
                   </p>
                 </div>
 
-                {% if home_cfg.about_btn_text and home_cfg.about_btn_url %}
-                  <div class="tg-btnbox">
+                <div class="tg-btnbox">
+                  {% if home_cfg.about_btn_text and home_cfg.about_btn_url %}
                     <a class="tg-btn" href="{{ home_cfg.about_btn_url }}">
                       <span>
-                        {% blocktrans with btn=home_cfg.about_btn_text %}
-                          {{ btn }}
-                        {% endblocktrans %}
+                        {% if home_cfg.about_btn_text %}
+                          {{ home_cfg.about_btn_text }}
+                        {% else %}
+                          {% blocktrans %}read more{% endblocktrans %}
+                        {% endif %}
                       </span>
                     </a>
-                  </div>
-                {% endif %}
+                  {% else %}
+                    <a class="tg-btn" href="#">
+                      <span>{% blocktrans %}read more{% endblocktrans %}</span>
+                    </a>
+                  {% endif %}
+                </div>
 
               </div>
             </div>
