@@ -173,42 +173,78 @@
         Upcoming Match Start
 *************************************-->
 <section class="tg-haslayout tg-bgstyleone">
-    <div class="tg-bgboxone"></div>
-    <div class="tg-bgboxtwo"></div>
-    <div class="tg-bgpattrant">
-        <div class="container">
-            <div class="row">
-                <div class="tg-upcomingmatch-counter">
-                    <div class="col-md-4 col-sm-4 col-xs-12 hidden-xs">
-                        <figure>
-                            <img src="{% static 'images/img-02.png' %}" alt="">
-                        </figure>
-                    </div>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-                        <div class="tg-contentbox">
-                            <div class="tg-section-heading">
-                                <h2>Gladiators <span>{% trans "VS" %}</span> Horned Frogs</h2>
-                            </div>
-                            <div class="tg-description">
-                                <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minimam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                            </div>
-                            <!--<div class="tg-counters">
-                                <div class="tg-counter tg-days"></div>
-                                <div class="tg-counter tg-hours"></div>
-                                <div class="tg-counter tg-minutes"></div>
-                                <div class="tg-counter tg-seconds"></div>
-                            </div>-->
-                            <div class="tg-btnbox">
-                                <a class="tg-btn" href="#"><span>{% trans "read more" %}</span></a>
-                                <a class="tg-btn" href="#"><span>{% trans "book my ticket" %}</span></a>
-                            </div>
-                        </div>
-                    </div>
-                </div> <!-- upcomingmatch-counter -->
+  <div class="tg-bgboxone"></div>
+  <div class="tg-bgboxtwo"></div>
+
+  <div class="tg-bgpattrant">
+    <div class="container">
+      <div class="row">
+        <div class="tg-upcomingmatch-counter">
+
+          <div class="col-md-4 col-sm-4 col-xs-12 hidden-xs">
+            <figure>
+              <img src="{% static 'images/img-02.png' %}" alt="">
+            </figure>
+          </div>
+
+          <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="tg-contentbox">
+
+              <div class="tg-section-heading">
+                <h2>
+                  {% if home_cfg.match_title %}
+                    {{ home_cfg.match_title }}
+                  {% else %}
+                    {% blocktrans %}Gladiators{% endblocktrans %}
+                    <span>{% blocktrans %}VS{% endblocktrans %}</span>
+                    {% blocktrans %}Horned Frogs{% endblocktrans %}
+                  {% endif %}
+                </h2>
+              </div>
+
+              <div class="tg-description">
+                <p>
+                  {% if home_cfg.match_text %}
+                    {{ home_cfg.match_text }}
+                  {% else %}
+                    {% blocktrans %}Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad minimam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.{% endblocktrans %}
+                  {% endif %}
+                </p>
+              </div>
+
+              {# counters пока выключены#}
+
+              <div class="tg-btnbox">
+                {% if home_cfg.match_btn1_text and home_cfg.match_btn1_url %}
+                  <a class="tg-btn" href="{{ home_cfg.match_btn1_url }}">
+                    <span>{{ home_cfg.match_btn1_text }}</span>
+                  </a>
+                {% else %}
+                  <a class="tg-btn" href="#">
+                    <span>{% blocktrans %}read more{% endblocktrans %}</span>
+                  </a>
+                {% endif %}
+
+                {% if home_cfg.match_btn2_text and home_cfg.match_btn2_url %}
+                  <a class="tg-btn" href="{{ home_cfg.match_btn2_url }}">
+                    <span>{{ home_cfg.match_btn2_text }}</span>
+                  </a>
+                {% else %}
+                  <a class="tg-btn" href="#">
+                    <span>{% blocktrans %}book my ticket{% endblocktrans %}</span>
+                  </a>
+                {% endif %}
+              </div>
+
             </div>
+          </div>
+
         </div>
+      </div>
     </div>
+  </div>
 </section>
+
 <!--************************************
         Upcoming Match End
 *************************************-->
