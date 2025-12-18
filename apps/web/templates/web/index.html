@@ -92,39 +92,59 @@
 <main id="tg-main" class="tg-main tg-haslayout">
 
     <!-- About Us Start -->
-    <section class="tg-main-section tg-haslayout">
-        <div class="container">
-            <div class="tg-section-name">
-                <h2>{% trans "About pro soccer" %}</h2>
+<section class="tg-main-section tg-haslayout">
+  <div class="container">
+
+    <div class="tg-section-name">
+      <h2>
+        {{ home_cfg.about_vertical_title|default:_("About pro soccer") }}
+      </h2>
+    </div>
+
+    <div class="col-sm-11 col-xs-11 pull-right">
+      <div class="row">
+        <div class="tg-aboutussection">
+          <div class="row">
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <figure>
+                <img src="{% static 'images/img-01.jpg' %}" alt="">
+              </figure>
             </div>
-            <div class="col-sm-11 col-xs-11 pull-right">
-                <div class="row">
-                    <div class="tg-aboutussection">
-                        <div class="row">
-                            <div class="col-md-6 col-sm-12 col-xs-12">
-                                <figure>
-                                    <img src="{% static 'images/img-01.jpg' %}" alt="">
-                                </figure>
-                            </div>
-                            <div class="col-md-6 col-sm-12 col-xs-12">
-                                <div class="tg-contentbox">
-                                    <div class="tg-section-heading">
-                                        <h2>{% trans "consectetur adipisicing elit sed do eiusmid tempor incididunt labore" %}</h2>
-                                    </div>
-                                    <div class="tg-description">
-                                        <p>{% trans "Consectetur adipisicing elit sed do eiusmod tempor incididunt utia labore et dolore magna aliqua enim ad minim veniam quistrud on ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreeu fugiat nulla pariatur cepteur sint occaecat." %}</p>
-                                    </div>
-                                    <div class="tg-btnbox">
-                                        <a class="tg-btn" href="#"><span>{% trans "read more" %}</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> <!-- row -->
-                    </div>
+
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="tg-contentbox">
+
+                <div class="tg-section-heading">
+                  <h2>
+                    {{ home_cfg.about_title|default:_("consectetur adipisicing elit sed do eiusmid tempor incididunt labore") }}
+                  </h2>
                 </div>
+
+                <div class="tg-description">
+                  <p>
+                    {{ home_cfg.about_text|default:_("Consectetur adipisicing elit sed do eiusmod tempor incididunt utia labore et dolore magna aliqua enim ad minim veniam quistrud on ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreeu fugiat nulla pariatur cepteur sint occaecat.") }}
+                  </p>
+                </div>
+
+                {% if home_cfg.about_btn_text and home_cfg.about_btn_url %}
+                  <div class="tg-btnbox">
+                    <a class="tg-btn" href="{{ home_cfg.about_btn_url }}">
+                      <span>{{ home_cfg.about_btn_text }}</span>
+                    </a>
+                  </div>
+                {% endif %}
+
+              </div>
             </div>
+
+          </div><!-- row -->
         </div>
-    </section>
+      </div>
+    </div>
+
+  </div>
+</section>
     <!-- About Us End -->
 
 <!--************************************
