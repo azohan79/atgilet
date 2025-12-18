@@ -506,15 +506,33 @@
         Video Start
 *************************************-->
 <section class="tg-videobox tg-haslayout">
-    <figure>
-        <img src="{% static 'images/bg-video.jpg' %}" alt="">
-        <figcaption>
-            <a class="tg-playbtn"
-               href="https://youtu.be/iC9CpnSj-MU?iframe=true"
-               data-rel="prettyPhoto[iframe]"></a>
-            <h2>accusantium doloremque lauda totam rem aperiam ipsa</h2>
-        </figcaption>
-    </figure>
+  <figure>
+
+    {# Poster #}
+    {% if home_cfg.video_poster %}
+      <img src="{{ home_cfg.video_poster.url }}" alt="">
+    {% else %}
+      <img src="{% static 'images/bg-video.jpg' %}" alt="">
+    {% endif %}
+
+    <figcaption>
+
+      {# URL для prettyPhoto iframe #}
+      {% with vurl=home_cfg.video_iframe_url|default:"https://youtu.be/iC9CpnSj-MU?iframe=true" %}
+        <a class="tg-playbtn"
+           href="{{ vurl }}"
+           data-rel="prettyPhoto[iframe]"></a>
+      {% endwith %}
+
+      {# Заголовок #}
+      {% if home_cfg.video_title %}
+        <h2>{{ home_cfg.video_title }}</h2>
+      {% else %}
+        <h2>{% blocktrans %}accusantium doloremque lauda totam rem aperiam ipsa{% endblocktrans %}</h2>
+      {% endif %}
+
+    </figcaption>
+  </figure>
 </section>
 <!--************************************
         Video End
