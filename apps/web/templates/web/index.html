@@ -800,66 +800,139 @@
         Blog Start
 *************************************-->
 <section class="tg-main-section tg-haslayout">
-    <div class="container">
-        <div class="tg-section-name">
-            <h2>{% trans "Latest blog / news" %}</h2>
-        </div>
-        <div class="col-sm-11 col-xs-11 pull-right">
-            <div class="row">
-                <div class="tg-blogpost">
-                    <div class="row">
-                        <div class="col-sm-6 col-xs-12">
-                            <article class="tg-post">
-                                <figure class="tg-postimg">
-                                    <a href="#">
-                                        <img src="{% static 'images/blog/img-01.jpg' %}" alt="">
-                                    </a>
-                                    <figcaption>
-                                        <ul class="tg-postmetadata">
-                                            <li><a href="#">{% trans "by admin" %}</a></li>
-                                            <li><a href="#">04 {% trans "comments" %}</a></li>
-                                            <li><a href="#">{% trans "lifestyle" %}</a></li>
-                                        </ul>
-                                    </figcaption>
-                                </figure>
-                                <div class="tg-posttitle">
-                                    <h3><a href="#">dipisicing elit sed do eiusmod tempor indunt</a></h3>
-                                </div>
-                                <div class="tg-description">
-                                    <p>Consectetur adipisicing elit sed do eiusmod temport incididunt utia labore et dolore magna aliqua enima ad minim veniam quistrud on ullamco laboris nisiut aliquip exea commodo consequat.</p>
-                                </div>
-                                <a class="tg-btn" href="#">{% trans "Read more" %}</a>
-                            </article>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <article class="tg-post">
-                                <figure class="tg-postimg">
-                                    <a href="#">
-                                        <img src="{% static 'images/blog/img-02.jpg' %}" alt="">
-                                    </a>
-                                    <figcaption>
-                                        <ul class="tg-postmetadata">
-                                            <li><a href="#">{% trans "by admin" %}</a></li>
-                                            <li><a href="#">04 {% trans "comments" %}</a></li>
-                                            <li><a href="#">{% trans "lifestyle" %}</a></li>
-                                        </ul>
-                                    </figcaption>
-                                </figure>
-                                <div class="tg-posttitle">
-                                    <h3><a href="#">dipisicing elit sed do eiusmod tempor indunt</a></h3>
-                                </div>
-                                <div class="tg-description">
-                                    <p>Consectetur adipisicing elit sed do eiusmod temport incididunt utia labore et dolore magna aliqua enima ad minim veniam quistrud on ullamco laboris nisiut aliquip exea commodo consequat.</p>
-                                </div>
-                                <a class="tg-btn" href="#"><span>{% trans "read more" %}</span></a>
-                            </article>
-                        </div>
-                    </div> <!-- row -->
-                </div>
-            </div>
-        </div>
+  <div class="container">
+
+    <div class="tg-section-name">
+      <h2>
+        {% if home_cfg.news_title %}
+          {{ home_cfg.news_title }}
+        {% else %}
+          {% blocktrans %}Latest blog / news{% endblocktrans %}
+        {% endif %}
+      </h2>
     </div>
+
+    <div class="col-sm-11 col-xs-11 pull-right">
+      <div class="row">
+        <div class="tg-blogpost">
+          <div class="row">
+
+            {# --- Post 1 --- #}
+            <div class="col-sm-6 col-xs-12">
+              <article class="tg-post">
+
+                <figure class="tg-postimg">
+                  <a href="#">
+                    <img src="{% static 'images/blog/img-01.jpg' %}" alt="">
+                  </a>
+                  <figcaption>
+                    <ul class="tg-postmetadata">
+                      <li>
+                        <a href="#">
+                          {% blocktrans %}by admin{% endblocktrans %}
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          04 {% blocktrans %}comments{% endblocktrans %}
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          {% blocktrans %}lifestyle{% endblocktrans %}
+                        </a>
+                      </li>
+                    </ul>
+                  </figcaption>
+                </figure>
+
+                <div class="tg-posttitle">
+                  <h3>
+                    <a href="#">
+                      {% blocktrans %}dipisicing elit sed do eiusmod tempor indunt{% endblocktrans %}
+                    </a>
+                  </h3>
+                </div>
+
+                <div class="tg-description">
+                  <p>
+                    {% blocktrans %}
+                    Consectetur adipisicing elit sed do eiusmod temport incididunt utia labore
+                    et dolore magna aliqua enima ad minim veniam quistrud on ullamco laboris
+                    nisiut aliquip exea commodo consequat.
+                    {% endblocktrans %}
+                  </p>
+                </div>
+
+                <a class="tg-btn" href="#">
+                  <span>{% blocktrans %}Read more{% endblocktrans %}</span>
+                </a>
+
+              </article>
+            </div>
+
+            {# --- Post 2 --- #}
+            <div class="col-sm-6 col-xs-12">
+              <article class="tg-post">
+
+                <figure class="tg-postimg">
+                  <a href="#">
+                    <img src="{% static 'images/blog/img-02.jpg' %}" alt="">
+                  </a>
+                  <figcaption>
+                    <ul class="tg-postmetadata">
+                      <li>
+                        <a href="#">
+                          {% blocktrans %}by admin{% endblocktrans %}
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          04 {% blocktrans %}comments{% endblocktrans %}
+                        </a>
+                      </li>
+                      <li>
+                        <a href="#">
+                          {% blocktrans %}lifestyle{% endblocktrans %}
+                        </a>
+                      </li>
+                    </ul>
+                  </figcaption>
+                </figure>
+
+                <div class="tg-posttitle">
+                  <h3>
+                    <a href="#">
+                      {% blocktrans %}dipisicing elit sed do eiusmod tempor indunt{% endblocktrans %}
+                    </a>
+                  </h3>
+                </div>
+
+                <div class="tg-description">
+                  <p>
+                    {% blocktrans %}
+                    Consectetur adipisicing elit sed do eiusmod temport incididunt utia labore
+                    et dolore magna aliqua enima ad minim veniam quistrud on ullamco laboris
+                    nisiut aliquip exea commodo consequat.
+                    {% endblocktrans %}
+                  </p>
+                </div>
+
+                <a class="tg-btn" href="#">
+                  <span>{% blocktrans %}read more{% endblocktrans %}</span>
+                </a>
+
+              </article>
+            </div>
+
+          </div> <!-- row -->
+        </div>
+      </div>
+    </div>
+
+  </div>
 </section>
+
 </main>
 
 <style>
