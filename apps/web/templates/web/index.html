@@ -700,52 +700,98 @@
         Points Table Start
 *************************************-->
 <section class="tg-haslayout tg-bgstyletwo">
-    <div class="tg-bgboxone"></div>
-    <div class="tg-bgboxtwo"></div>
-    <div class="tg-bgpattrant">
-        <div class="container">
-            <div class="row">
-                <div class="tg-pointstablewrapper">
-                    <div class="col-sm-8 col-xs-12">
-                        <div class="tg-pointstable">
-                            <div class="tg-section-heading">
-                                <h2>{% trans "points table" %}</h2>
-                            </div>
-                            <div id="tg-pointstable-slider" class="tg-pointstable-slider">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <div class="tg-pointtable">
-                                            <div class="tg-box">Pink Dragons</div>
-                                            <div class="tg-box">w 1</div>
-                                            <div class="tg-box">d 0</div>
-                                            <div class="tg-box">l 1</div>
-                                            <div class="tg-box">pt 2</div>
-                                        </div>
-                                    </div>
-                                    <!-- остальные слайды как в оригинале -->
-                                </div>
-                                <div class="tg-themebtnnext">
-                                    <span class="fa fa-angle-down"></span>
-                                </div>
-                                <div class="tg-themebtnprev">
-                                    <span class="fa fa-angle-up"></span>
-                                </div>
-                            </div>
-                            <div class="tg-btnbox">
-                                <a class="tg-btn" href="#"><span>{% trans "view all" %}</span></a>
-                            </div>
-                        </div>
+  <div class="tg-bgboxone"></div>
+  <div class="tg-bgboxtwo"></div>
+
+  <div class="tg-bgpattrant">
+    <div class="container">
+      <div class="row">
+        <div class="tg-pointstablewrapper">
+
+          <div class="col-sm-8 col-xs-12">
+            <div class="tg-pointstable">
+
+              <div class="tg-section-heading">
+                <h2>
+                  {% if home_cfg.table_title %}
+                    {{ home_cfg.table_title }}
+                  {% else %}
+                    {% blocktrans %}points table{% endblocktrans %}
+                  {% endif %}
+                </h2>
+              </div>
+
+              <div id="tg-pointstable-slider" class="tg-pointstable-slider">
+                <div class="swiper-wrapper">
+
+                  {# Пока статикой; позже заменим на queryset/парсер таблицы #}
+                  <div class="swiper-slide">
+                    <div class="tg-pointtable">
+                      <div class="tg-box">{% blocktrans %}Pink Dragons{% endblocktrans %}</div>
+                      <div class="tg-box">{% blocktrans %}w 1{% endblocktrans %}</div>
+                      <div class="tg-box">{% blocktrans %}d 0{% endblocktrans %}</div>
+                      <div class="tg-box">{% blocktrans %}l 1{% endblocktrans %}</div>
+                      <div class="tg-box">{% blocktrans %}pt 2{% endblocktrans %}</div>
                     </div>
-                    <div class="col-sm-4 col-xs-12 hidden-xs">
-                        <figure>
-                            <img src="{% static 'images/img-03.png' %}" alt="">
-                        </figure>
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="tg-pointtable">
+                      <div class="tg-box">{% blocktrans %}Gladiators{% endblocktrans %}</div>
+                      <div class="tg-box">{% blocktrans %}w 2{% endblocktrans %}</div>
+                      <div class="tg-box">{% blocktrans %}d 0{% endblocktrans %}</div>
+                      <div class="tg-box">{% blocktrans %}l 0{% endblocktrans %}</div>
+                      <div class="tg-box">{% blocktrans %}pt 6{% endblocktrans %}</div>
                     </div>
-                </div> <!-- wrapper -->
+                  </div>
+
+                  <div class="swiper-slide">
+                    <div class="tg-pointtable">
+                      <div class="tg-box">{% blocktrans %}Horned Frogs{% endblocktrans %}</div>
+                      <div class="tg-box">{% blocktrans %}w 1{% endblocktrans %}</div>
+                      <div class="tg-box">{% blocktrans %}d 1{% endblocktrans %}</div>
+                      <div class="tg-box">{% blocktrans %}l 0{% endblocktrans %}</div>
+                      <div class="tg-box">{% blocktrans %}pt 4{% endblocktrans %}</div>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="tg-themebtnnext">
+                  <span class="fa fa-angle-down"></span>
+                </div>
+                <div class="tg-themebtnprev">
+                  <span class="fa fa-angle-up"></span>
+                </div>
+              </div>
+
+              <div class="tg-btnbox">
+                <a class="tg-btn" href="{{ home_cfg.table_btn_url|default:'#' }}">
+                  <span>
+                    {% if home_cfg.table_btn_text %}
+                      {{ home_cfg.table_btn_text }}
+                    {% else %}
+                      {% blocktrans %}view all{% endblocktrans %}
+                    {% endif %}
+                  </span>
+                </a>
+              </div>
+
             </div>
+          </div>
+
+          <div class="col-sm-4 col-xs-12 hidden-xs">
+            <figure>
+              <img src="{% static 'images/img-03.png' %}" alt="">
+            </figure>
+          </div>
+
         </div>
+      </div>
     </div>
+  </div>
 </section>
+
 <!--************************************
         Points Table End
 *************************************-->
