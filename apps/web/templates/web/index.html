@@ -97,7 +97,9 @@
 
     <div class="tg-section-name">
       <h2>
-        {{ home_cfg.about_vertical_title|default:_("About pro soccer") }}
+        {% blocktrans with title=home_cfg.about_vertical_title %}
+          {{ title|default:"About pro soccer" }}
+        {% endblocktrans %}
       </h2>
     </div>
 
@@ -117,20 +119,28 @@
 
                 <div class="tg-section-heading">
                   <h2>
-                    {{ home_cfg.about_title|default:_("consectetur adipisicing elit sed do eiusmid tempor incididunt labore") }}
+                    {% blocktrans with title=home_cfg.about_title %}
+                      {{ title|default:"consectetur adipisicing elit sed do eiusmid tempor incididunt labore" }}
+                    {% endblocktrans %}
                   </h2>
                 </div>
 
                 <div class="tg-description">
                   <p>
-                    {{ home_cfg.about_text|default:_("Consectetur adipisicing elit sed do eiusmod tempor incididunt utia labore et dolore magna aliqua enim ad minim veniam quistrud on ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreeu fugiat nulla pariatur cepteur sint occaecat.") }}
+                    {% blocktrans with text=home_cfg.about_text %}
+                      {{ text|default:"Consectetur adipisicing elit sed do eiusmod tempor incididunt utia labore et dolore magna aliqua enim ad minim veniam quistrud on ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum doloreeu fugiat nulla pariatur cepteur sint occaecat." }}
+                    {% endblocktrans %}
                   </p>
                 </div>
 
                 {% if home_cfg.about_btn_text and home_cfg.about_btn_url %}
                   <div class="tg-btnbox">
                     <a class="tg-btn" href="{{ home_cfg.about_btn_url }}">
-                      <span>{{ home_cfg.about_btn_text }}</span>
+                      <span>
+                        {% blocktrans with btn=home_cfg.about_btn_text %}
+                          {{ btn }}
+                        {% endblocktrans %}
+                      </span>
                     </a>
                   </div>
                 {% endif %}
@@ -138,7 +148,7 @@
               </div>
             </div>
 
-          </div><!-- row -->
+          </div>
         </div>
       </div>
     </div>
