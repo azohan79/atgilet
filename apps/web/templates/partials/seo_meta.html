@@ -1,40 +1,19 @@
 {% load static i18n %}
 {% static 'images/og-default.png' as og_default_img %}
 
-{# --- SEO title --- #}
-{% if seo_title %}
-  {% with _seo_title=seo_title %}
-{% else %}
-  {% with _seo_title=_("CF Atlético Gilet – Official Website") %}
-{% endif %}
-
-{# --- SEO description --- #}
-{% if seo_description %}
-  {% with _seo_desc=seo_description %}
-{% else %}
-  {% with _seo_desc=_("Official website of CF Atlético Gilet. Training, matches, tournaments and football camps.") %}
-{% endif %}
-
-{# --- SEO keywords --- #}
-{% if seo_keywords %}
-  {% with _seo_keys=seo_keywords %}
-{% else %}
-  {% with _seo_keys="CF Atlético Gilet, football club Gilet, fútbol base Valencia, Camp de Morvedre" %}
-{% endif %}
-
-{# --- SEO image --- #}
-{% if seo_image %}
-  {% with _seo_img=seo_image %}
-{% else %}
-  {% with _seo_img=request.scheme|add:'://'|add:request.get_host|add:og_default_img %}
-{% endif %}
+{% firstof seo_title _("CF Atlético Gilet – Official Website") as _seo_title %}
+{% firstof seo_description _("Official website of CF Atlético Gilet. Training, matches, tournaments and football camps.") as _seo_desc %}
+{% firstof seo_keywords "CF Atlético Gilet, football club Gilet, fútbol base Valencia, Camp de Morvedre" as _seo_keys %}
+{% firstof seo_image request.scheme|add:'://'|add:request.get_host|add:og_default_img as _seo_img %}
 
 <title>{{ _seo_title }}</title>
+
 <meta name="description" content="{{ _seo_desc }}">
 <meta name="keywords" content="{{ _seo_keys }}">
 <meta name="robots" content="{{ seo_robots|default:'index, follow' }}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- Open Graph -->
 <meta property="og:type" content="{{ og_type|default:'website' }}">
 <meta property="og:site_name" content="CF Atlético Gilet">
 <meta property="og:title" content="{{ og_title|default:_seo_title }}">
@@ -43,9 +22,8 @@
 <meta property="og:image" content="{{ og_image|default:_seo_img }}">
 <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
 
+<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{ twitter_title|default:og_title|default:_seo_title }}">
 <meta name="twitter:description" content="{{ twitter_description|default:og_description|default:_seo_desc }}">
 <meta name="twitter:image" content="{{ twitter_image|default:og_image|default:_seo_img }}">
-
-{% endwith %}{% endwith %}{% endwith %}{% endwith %}
