@@ -40,12 +40,12 @@
     <meta property="og:title" content="{{ og_title|default:meta_title|default:_('CF Atlético Gilet – Official Website') }}">
     <meta property="og:description" content="{{ og_description|default:meta_description|default:_('Youth football club in Gilet. Training, matches, tournaments and football camps.') }}">
     <meta property="og:url" content="{{ og_url|default:request.build_absolute_uri }}">
-    <meta property="og:image" content="{{ og_image|default:request.scheme|add:'://'|add:request.get_host|add:static('images/og-default.jpg') }}">
+    <meta property="og:image" content="{{ og_image|default:request.scheme|add:'://'|add:request.get_host|add:static('images/og-default.png') }}">
     <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
 
     <meta name="twitter:title" content="{% block twitter_title %}{% block share_title %}{% trans 'CF Atlético Gilet – Official Website' %}{% endblock %}{% endblock %}">
     <meta name="twitter:description" content="{% block twitter_description %}{% block share_description %}{% trans 'Youth football club in Gilet. Training, matches, tournaments and football camps.' %}{% endblock %}{% endblock %}">
-    <meta name="twitter:image" content="{% block twitter_image %}{% block share_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'images/og-default.jpg' %}{% endblock %}{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{% block share_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'images/og-default.png' %}{% endblock %}{% endblock %}">
 
     {% block extra_meta %}{% endblock %}
     
