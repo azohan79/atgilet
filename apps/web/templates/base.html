@@ -8,28 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
    
-    <title>{% block seo_title %}{% trans "CF Atlético Gilet – Official Website" %}{% endblock %}</title>
-
-    <meta name="description" content="{% block seo_description %}{% trans 'Official website of CF Atlético Gilet. Training, matches, tournaments and football camps.' %}{% endblock %}">
-    <meta name="keywords" content="{% block seo_keywords %}CF Atlético Gilet, football club Gilet, fútbol base Valencia, Camp de Morvedre{% endblock %}">
-    <meta name="robots" content="{% block seo_robots %}index, follow{% endblock %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    {% block seo_image %}{{ request.scheme }}://{{ request.get_host }}{{ og_default_img }}{% endblock %}
-
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="CF Atlético Gilet">
-    <meta property="og:title" content="{% block og_title %}{% block seo_title %}{% trans 'CF Atlético Gilet – Official Website' %}{% endblock %}{% endblock %}">
-    <meta property="og:description" content="{% block og_description %}{% block seo_description %}{% trans 'Official website of CF Atlético Gilet. Training, matches, tournaments and football camps.' %}{% endblock %}{% endblock %}">
-    <meta property="og:url" content="{{ request.build_absolute_uri }}">
-    <meta property="og:image" content="{% block og_image %}{% block seo_image %}{{ request.scheme }}://{{ request.get_host }}{{ og_default_img }}{% endblock %}{% endblock %}">
-    <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{% block twitter_title %}{% block og_title %}{% block seo_title %}{% trans 'CF Atlético Gilet – Official Website' %}{% endblock %}{% endblock %}{% endblock %}">
-    <meta name="twitter:description" content="{% block twitter_description %}{% block og_description %}{% block seo_description %}{% trans 'Official website of CF Atlético Gilet. Training, matches, tournaments and football camps.' %}{% endblock %}{% endblock %}{% endblock %}">
-    <meta name="twitter:image" content="{% block twitter_image %}{% block og_image %}{% block seo_image %}{{ request.scheme }}://{{ request.get_host }}{{ og_default_img }}{% endblock %}{% endblock %}{% endblock %}">
-
+    {% block seo %}
+        {% include "partials/seo_meta.html" %}
+    {% endblock %}
     {% block extra_meta %}{% endblock %}
 
     

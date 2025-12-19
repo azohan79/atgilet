@@ -1,0 +1,34 @@
+{% load static i18n %}
+{% static 'images/og-default.png' as og_default_img %}
+
+{# значения из контекста с дефолтами #}
+{% if seo_title %}{% with _seo_title=seo_title %}{% else %}{% with _seo_title=_("CF Atlético Gilet – Official Website") %}{% endif %}
+{% if seo_description %}{% with _seo_desc=seo_description %}{% else %}{% with _seo_desc=_("Official website of CF Atlético Gilet. Training, matches, tournaments and football camps.") %}{% endif %}
+{% if seo_keywords %}{% with _seo_keys=seo_keywords %}{% else %}{% with _seo_keys="CF Atlético Gilet, football club Gilet, fútbol base Valencia, Camp de Morvedre" %}{% endif %}
+
+{% if seo_image %}
+  {% with _seo_img=seo_image %}
+{% else %}
+  {% with _seo_img=request.scheme|add:'://'|add:request.get_host|add:og_default_img %}
+{% endif %}
+
+<title>{{ _seo_title }}</title>
+<meta name="description" content="{{ _seo_desc }}">
+<meta name="keywords" content="{{ _seo_keys }}">
+<meta name="robots" content="{{ seo_robots|default:'index, follow' }}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta property="og:type" content="{{ og_type|default:'website' }}">
+<meta property="og:site_name" content="CF Atlético Gilet">
+<meta property="og:title" content="{{ og_title|default:_seo_title }}">
+<meta property="og:description" content="{{ og_description|default:_seo_desc }}">
+<meta property="og:url" content="{{ og_url|default:request.build_absolute_uri }}">
+<meta property="og:image" content="{{ og_image|default:_seo_img }}">
+<meta property="og:locale" content="{{ LANGUAGE_CODE }}">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ twitter_title|default:og_title|default:_seo_title }}">
+<meta name="twitter:description" content="{{ twitter_description|default:og_description|default:_seo_desc }}">
+<meta name="twitter:image" content="{{ twitter_image|default:og_image|default:_seo_img }}">
+
+{% endwith %}{% endwith %}{% endwith %}
