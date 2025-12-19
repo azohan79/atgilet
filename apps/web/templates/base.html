@@ -9,7 +9,14 @@
     
    
     {% block seo %}
+    {% with
+        seo_title="CF Atlético Gilet – Official Website"
+        seo_description="Official website of CF Atlético Gilet. Training, matches, tournaments and football camps."
+        seo_keywords="CF Atlético Gilet, football club Gilet, fútbol base Valencia, Camp de Morvedre"
+        seo_image=request.scheme|add:'://'|add:request.get_host|add:'/static/images/og-default.png'
+    %}
         {% include "partials/seo_meta.html" %}
+    {% endwith %}
     {% endblock %}
     {% block extra_meta %}{% endblock %}
 
