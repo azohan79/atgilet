@@ -19,7 +19,7 @@
 
     {% block share_title %}{% trans "CF Atlético Gilet – Official Website" %}{% endblock %}
     {% block share_description %}{% trans "Youth football club in Gilet. Training, matches, tournaments and football camps." %}{% endblock %}
-    {% block share_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'images/og-default.jpg' %}{% endblock %}
+    {% block share_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'images/og-default.png' %}{% endblock %}
     {% block share_url %}{{ request.build_absolute_uri }}{% endblock %}
 
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
