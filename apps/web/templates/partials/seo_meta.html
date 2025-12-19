@@ -1,11 +1,28 @@
 {% load static i18n %}
 {% static 'images/og-default.png' as og_default_img %}
 
-{# значения из контекста с дефолтами #}
-{% if seo_title %}{% with _seo_title=seo_title %}{% else %}{% with _seo_title=_("CF Atlético Gilet – Official Website") %}{% endif %}
-{% if seo_description %}{% with _seo_desc=seo_description %}{% else %}{% with _seo_desc=_("Official website of CF Atlético Gilet. Training, matches, tournaments and football camps.") %}{% endif %}
-{% if seo_keywords %}{% with _seo_keys=seo_keywords %}{% else %}{% with _seo_keys="CF Atlético Gilet, football club Gilet, fútbol base Valencia, Camp de Morvedre" %}{% endif %}
+{# --- SEO title --- #}
+{% if seo_title %}
+  {% with _seo_title=seo_title %}
+{% else %}
+  {% with _seo_title=_("CF Atlético Gilet – Official Website") %}
+{% endif %}
 
+{# --- SEO description --- #}
+{% if seo_description %}
+  {% with _seo_desc=seo_description %}
+{% else %}
+  {% with _seo_desc=_("Official website of CF Atlético Gilet. Training, matches, tournaments and football camps.") %}
+{% endif %}
+
+{# --- SEO keywords --- #}
+{% if seo_keywords %}
+  {% with _seo_keys=seo_keywords %}
+{% else %}
+  {% with _seo_keys="CF Atlético Gilet, football club Gilet, fútbol base Valencia, Camp de Morvedre" %}
+{% endif %}
+
+{# --- SEO image --- #}
 {% if seo_image %}
   {% with _seo_img=seo_image %}
 {% else %}
@@ -31,4 +48,4 @@
 <meta name="twitter:description" content="{{ twitter_description|default:og_description|default:_seo_desc }}">
 <meta name="twitter:image" content="{{ twitter_image|default:og_image|default:_seo_img }}">
 
-{% endwith %}{% endwith %}{% endwith %}
+{% endwith %}{% endwith %}{% endwith %}{% endwith %}
