@@ -2,15 +2,10 @@
 {% load static i18n %}
 
 {% block seo %}
-  {% with
-    seo_title="News – CF Atlético Gilet"
-    seo_description="Club news, announcements, training updates, tournaments and football camps."
-    seo_keywords="CF Atlético Gilet news, club updates, tournaments, football camp"
-    seo_image=request.scheme|add:'://'|add:request.get_host|add:'/static/images/og-news.png'
-  %}
+  {% with seo_title="News – CF Atlético Gilet" seo_description="Club news, announcements, training updates, tournaments and football camps." seo_keywords="CF Atlético Gilet news, club updates, tournaments, football camp" seo_image=request.scheme|add:'://'|add:request.get_host|add:'/static/images/og-news.png' %}
     {% include "partials/seo_meta.html" %}
   {% endwith %}
-{% endblock %}
+{% endblock seo %}
 
 {% block content %}
 <main id="tg-main" class="tg-main tg-haslayout">

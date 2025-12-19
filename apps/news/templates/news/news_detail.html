@@ -2,14 +2,11 @@
 {% load static i18n %}
 
 {% block seo %}
-  {% with
-    seo_title=post.title
-    seo_description=post.short_description
-    og_url=request.build_absolute_uri
-  %}
+  {% with seo_title=post.title seo_description=post.short_description og_url=request.build_absolute_uri %}
     {% include "partials/seo_meta.html" %}
   {% endwith %}
-{% endblock %}
+{% endblock seo %}
+
 
 {% block content %}
 <main id="tg-main" class="tg-main tg-haslayout">
