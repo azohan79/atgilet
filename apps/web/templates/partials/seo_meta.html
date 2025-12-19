@@ -6,6 +6,15 @@
 {% firstof seo_keywords "CF Atlético Gilet, football club Gilet, fútbol base Valencia, Camp de Morvedre" as seo_keys_val %}
 {% firstof seo_image request.scheme|add:'://'|add:request.get_host|add:og_default_img as seo_img_val %}
 
+{% firstof og_title seo_title_val as og_title_val %}
+{% firstof og_description seo_desc_val as og_desc_val %}
+{% firstof og_image seo_img_val as og_img_val %}
+{% firstof og_url request.build_absolute_uri as og_url_val %}
+
+{% firstof twitter_title og_title_val as twitter_title_val %}
+{% firstof twitter_description og_desc_val as twitter_desc_val %}
+{% firstof twitter_image og_img_val as twitter_img_val %}
+
 <title>{{ seo_title_val }}</title>
 
 <meta name="description" content="{{ seo_desc_val }}">
@@ -16,14 +25,14 @@
 <!-- Open Graph -->
 <meta property="og:type" content="{{ og_type|default:'website' }}">
 <meta property="og:site_name" content="CF Atlético Gilet">
-<meta property="og:title" content="{{ og_title|default:seo_title_val }}">
-<meta property="og:description" content="{{ og_description|default:seo_desc_val }}">
-<meta property="og:url" content="{{ og_url|default:request.build_absolute_uri }}">
-<meta property="og:image" content="{{ og_image|default:seo_img_val }}">
+<meta property="og:title" content="{{ og_title_val }}">
+<meta property="og:description" content="{{ og_desc_val }}">
+<meta property="og:url" content="{{ og_url_val }}">
+<meta property="og:image" content="{{ og_img_val }}">
 <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="{{ twitter_title|default:og_title|default:seo_title_val }}">
-<meta name="twitter:description" content="{{ twitter_description|default:og_description|default:seo_desc_val }}">
-<meta name="twitter:image" content="{{ twitter_image|default:og_image|default:seo_img_val }}">
+<meta name="twitter:title" content="{{ twitter_title_val }}">
+<meta name="twitter:description" content="{{ twitter_desc_val }}">
+<meta name="twitter:image" content="{{ twitter_img_val }}">
