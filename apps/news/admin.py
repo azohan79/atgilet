@@ -12,10 +12,9 @@ class NewsCategoryAdmin(admin.ModelAdmin):
 @admin.register(NewsPost)
 class NewsPostAdmin(admin.ModelAdmin):
     list_display = ("title", "is_published", "published_at", "category", "author_name")
-    list_filter = ("is_published", "category")
+    list_filter = ("is_published", "category", "published_at")
     search_fields = ("title", "excerpt", "content", "tags", "author_name")
     prepopulated_fields = {"slug": ("title",)}
-    date_hierarchy = "published_at"
     ordering = ("-published_at", "-created_at")
     fieldsets = (
         ("Main", {"fields": ("title", "slug", "excerpt", "content", "image")}),
