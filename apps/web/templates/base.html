@@ -5,10 +5,37 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% block title %}{% trans "Soccer Bootstrap Theme" %}{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}{% endblock %}">
+        <title>
+        {% block title %}
+            {% trans "CF Atlético Gilet – Official Football Club" %}
+        {% endblock %}
+    </title>
+
+        <!-- META -->
+    <meta name="description" content="{% block meta_description %}{% trans 'Official website of CF Atlético Gilet. Youth football, training, tournaments and local competitions in Camp de Morvedre.' %}{% endblock %}">
+    <meta name="keywords" content="{% block meta_keywords %}CF Atlético Gilet, football club Gilet, fútbol base Valencia, Camp de Morvedre{% endblock %}">
+    <meta name="author" content="CF Atlético Gilet">
+    <meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}">
+
+    <!-- VIEWPORT -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:site_name" content="CF Atlético Gilet">
+    <meta property="og:title" content="{% block og_title %}{% trans 'CF Atlético Gilet – Official Website' %}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{% trans 'Youth football club in Gilet. Training, matches, tournaments and football camps.' %}{% endblock %}">
+    <meta property="og:url" content="{% block og_url %}{{ request.build_absolute_uri }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ request.scheme }}://{{ request.get_host }}{% static 'images/og-default.jpg' %}{% endblock %}">
+    <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
+
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}{% block og_title %}{% endblock %}{% endblock %}">
+    <meta name="twitter:description" content="{% block twitter_description %}{% block og_description %}{% endblock %}{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{% block og_image %}{% endblock %}{% endblock %}">
+
+    {% block extra_meta %}{% endblock %}
     
     <link rel="icon" type="image/png" sizes="32x32"
         href="{% static 'img/favicon/cropped-Logo-At-Gilet-32x32.jpg' %}">
@@ -389,7 +416,7 @@
                                 <ul class="tg-contactinfo">
                                     <li>
                                         <i class="fa fa-home"></i>
-                                        <address>46149, gilet</address>
+                                        <address>46149, Gilet</address>
                                     </li>
                                     <li>
                                         <i class="fa fa-envelope-o"></i>
