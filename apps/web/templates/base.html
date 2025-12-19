@@ -264,7 +264,7 @@
                         <div class="col-sm-4">
                             <div class="tg-footercol">
                                 <div class="tg-posttitle">
-                                    <h3>{% trans "Signup newsletter" %}</h3>
+                                    <h3>{% trans "Suscríbete al boletín informativo" %}</h3>
                                 </div>
                                 <div class="tg-description">
                                     <p>Adipisicing elit, sed do eiusmod tempor incidunta utiai labore et dolore magna si aliqua quis.</p>
@@ -278,12 +278,12 @@
                                                    placeholder="{% trans 'Email' %}">
                                         </div>
                                         <button class="tg-btn" type="submit">
-                                            {% trans "Signup" %}
+                                            {% trans "Registrar" %}
                                         </button>
                                     </fieldset>
                                 </form>
                         <div class="tg-posttitle">
-                                    <h3>{% trans "Popular tags" %}</h3>
+                                    <h3>{% trans "Tags populares" %}</h3>
                                 </div>
                                 <div class="tg-tags">
                                     {% if menu_footer_tags %}
@@ -318,7 +318,7 @@
                                 <div class="tg-posttitle">
                                     <h3>{% trans "Top products" %}</h3>
                                 </div>
-                                <div class="tg-toprated">
+                               <!-- <div class="tg-toprated">
                                     <ul>
                                         <li>
                                             <figure>
@@ -369,7 +369,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                </div>
+                                </div>  -->
                             </div>
                         </div>
 
@@ -389,20 +389,20 @@
                                 <ul class="tg-contactinfo">
                                     <li>
                                         <i class="fa fa-home"></i>
-                                        <address>123 Eccles Old Road, New Salford Road London, Uk, M6 7AF</address>
+                                        <address>46149, gilet</address>
                                     </li>
                                     <li>
                                         <i class="fa fa-envelope-o"></i>
-                                        <a href="mailto:info@domain.com">info@domain.com</a>
+                                        <a href="mailto:info@domain.com">info@atgilet.es</a>
                                     </li>
                                     <li>
                                         <i class="fa fa-phone"></i>
-                                        <span>+44 123 456 788 - 9</span>
+                                        <span>+34 000 000 000</span>
                                     </li>
                                 </ul>
                                 <div class="tg-haslayout">
                                     <a class="tg-btn" href="#">
-                                        {% trans "Read more" %}
+                                        {% trans "Leer más" %}
                                     </a>
                                 </div>
                             </div>
@@ -415,7 +415,11 @@
         <div class="tg-footerbar">
             <div class="container">
                 <span class="tg-copyright">
-                    © 1933 - {% now "Y" %} {% trans "ATGilet development by MISSOFFDESIGN" %}
+                   © 1933 – {% now "Y" %}
+                    {% trans "ATGilet development by" %}
+                    <a href="https://missoff.org" target="_blank" rel="noopener noreferrer">
+                        MISSOFFDESIGN
+                    </a>
                 </span>
                     <nav class="tg-footernav">
                         <ul>
@@ -469,11 +473,11 @@
                         <fieldset>
                             <input type="search"
                                    class="form-control"
-                                   placeholder="{% trans 'Keyword' %}">
+                                   placeholder="{% trans 'Palabra clave' %}">
                             <i class="icon-icon_search2"></i>
                         </fieldset>
                     </form>
-                    <p>{% trans "Start typing and press Enter to search" %}</p>
+                    <p>{% trans "Empieza a escribir y pulsa Enter para buscar" %}</p>
                 </div>
             </div>
         </div>
@@ -491,7 +495,7 @@
         <div class="tg-modal-content">
             <div class="tg-formarea">
                 <div class="tg-border-heading">
-                    <h3>{% trans "Login" %}</h3>
+                    <h3>{% trans "Iniciar" %}</h3>
                 </div>
                 <form class="tg-loginform" method="post">
                     <fieldset>
@@ -499,20 +503,20 @@
                             <input type="text"
                                    name="userName_email"
                                    class="form-control"
-                                   placeholder="{% trans 'Username or email' %}">
+                                   placeholder="{% trans 'Nombre de usuario o correo electrónico' %}">
                         </div>
                         <div class="form-group">
                             <input type="password"
                                    name="password"
                                    class="form-control"
-                                   placeholder="{% trans 'Password' %}">
+                                   placeholder="{% trans 'Contrasena' %}">
                         </div>
                         <div class="form-group">
                             <label>
                                 <input type="checkbox"
                                        value="rememberme"
                                        class="checkbox">
-                                <em>{% trans "Remember Me" %}</em>
+                                <em>{% trans "Acuérdate de mí" %}</em>
                             </label>
                             <a href="#">
                                 <em>{% trans "Forgot Password" %}</em>
@@ -521,13 +525,13 @@
                         </div>
                         <div class="form-group">
                             <button class="tg-btn tg-btn-lg" type="submit">
-                                {% trans "Login Now" %}
+                                {% trans "Iniciar" %}
                             </button>
                         </div>
                         <div class="tg-description">
                             <p>
-                                {% trans "Don't have an account?" %}
-                                <a href="#">{% trans "Signup" %}</a>
+                                {% trans "¿No tienes una cuenta?" %}
+                                <a href="#">{% trans "Registrar" %}</a>
                             </p>
                         </div>
                     </fieldset>
@@ -535,7 +539,7 @@
             </div>
             <div class="tg-logintype">
                 <div class="tg-border-heading">
-                    <h3>{% trans "Login with" %}</h3>
+                    <h3>{% trans "Iniciar con" %}</h3>
                 </div>
                 <ul>
                     <li class="tg-facebook"><a href="#">facebook</a></li>
@@ -553,7 +557,7 @@
         <div class="tg-modal-content">
             <div class="tg-formarea">
                 <div class="tg-border-heading">
-                    <h3>{% trans "Signup" %}</h3>
+                    <h3>{% trans "Registrar" %}</h3>
                 </div>
                 <form class="tg-loginform" method="post">
                     <fieldset>
@@ -561,7 +565,7 @@
                             <input type="text"
                                    name="userName"
                                    class="form-control"
-                                   placeholder="{% trans 'Username' %}">
+                                   placeholder="{% trans 'Nombre de usuario' %}">
                         </div>
                         <div class="form-group">
                             <input type="email"
@@ -572,18 +576,18 @@
                         <div class="form-group">
                             <div class="tg-note">
                                 <i class="fa fa-exclamation-circle"></i>
-                                <span>{% trans "We will email you your password." %}</span>
+                                <span>{% trans "Le enviaremos su contraseña por correo electrónico." %}</span>
                             </div>
                         </div>
                         <div class="form-group">
                             <button class="tg-btn tg-btn-lg" type="submit">
-                                {% trans "Signup Now" %}
+                                {% trans "Registrar" %}
                             </button>
                         </div>
                         <div class="tg-description">
                             <p>
                                 {% trans "Already have an account?" %}
-                                <a href="#">{% trans "Login" %}</a>
+                                <a href="#">{% trans "Iniciar" %}</a>
                             </p>
                         </div>
                     </fieldset>
@@ -591,7 +595,7 @@
             </div>
             <div class="tg-logintype">
                 <div class="tg-border-heading">
-                    <h3>{% trans "Signup with" %}</h3>
+                    <h3>{% trans "Iniciar con" %}</h3>
                 </div>
                 <ul>
                     <li class="tg-facebook"><a href="#">facebook</a></li>
