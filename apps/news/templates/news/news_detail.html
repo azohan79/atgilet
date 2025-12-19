@@ -9,6 +9,22 @@
 
 
 {% block content %}
+<div class="tg-banner tg-haslayout">
+  <div class="tg-imglayer">
+    <img src="{% static 'images/bg-pattran.png' %}" alt="">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="tg-banner-content tg-haslayout">
+        <div class="tg-pagetitle"><h1>Latest Blog / News</h1></div>
+        <ol class="tg-breadcrumb">
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li class="active">News</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
 <main id="tg-main" class="tg-main tg-haslayout">
   <div class="tg-main-section tg-haslayout">
     <div class="container">
