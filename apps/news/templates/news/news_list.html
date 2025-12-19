@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block seo %}
+  {% with
+    seo_title="News – CF Atlético Gilet"
+    seo_description="Club news, announcements, training updates, tournaments and football camps."
+    seo_keywords="CF Atlético Gilet news, club updates, tournaments, football camp"
+    seo_image=request.scheme|add:'://'|add:request.get_host|add:'/static/images/og-news.png'
+  %}
+    {% include "partials/seo_meta.html" %}
+  {% endwith %}
+{% endblock %}
+
+{% block content %}
+<main id="tg-main" class="tg-main tg-haslayout">
+  <div class="tg-main-section tg-haslayout">
+    <div class="container">
+      <div class="row">
+        <div class="tg-section-name">
+          <h2>Latest blogs / News</h2>
+        </div>
+
+        <div class="col-sm-11 col-xs-11 pull-right">
+          <div class="tg-blogpost tg-blogpostlist">
+            <div class="row">
+
+              {% for post in posts %}
+              <div class="col-sm-6 col-xs-12">
+                <article class="tg-post">
+                  <figure class="tg-postimg">
+                    <a href="{{ post.get_absolute_url }}">
+                      {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                      {% else %}
+                        <img src="{% static 'images/blog/img-14.jpg' %}" alt="{{ post.title }}">
+                      {% endif %}
+                    </a>
+                    <figcaption>
+                      <ul class="tg-postmetadata">
+                        <li><a href="#">{{ post.author_name }}</a></li>
+                        {# comments пока нет — оставим заглушку или уберём #}
+                        {# <li><a href="#">04 comments</a></li> #}
+                        {% if post.category %}
+                          <li><a href="?category={{ post.category.slug }}">{{ post.category.name }}</a></li>
+                        {% endif %}
+                      </ul>
+                    </figcaption>
+                  </figure>
+
+                  <div class="tg-posttitle">
+                    <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                  </div>
+
+                  <div class="tg-description">
+                    <p>
+                      {% if post.excerpt %}
+                        {{ post.excerpt|truncatechars:220 }}
+                      {% else %}
+                        {{ post.content|striptags|truncatechars:220 }}
+                      {% endif %}
+                    </p>
+                  </div>
+
+                  <a class="tg-btn" href="{{ post.get_absolute_url }}">Read more</a>
+                </article>
+              </div>
+              {% empty %}
+                <div class="col-xs-12">
+                  <p>No news yet.</p>
+                </div>
+              {% endfor %}
+
+            </div>
+          </div>
+
+          {% if is_paginated %}
+          <ul class="tg-pagination">
+            <li class="tg-prevpage {% if not page_obj.has_previous %}disabled{% endif %}">
+              {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
+              {% else %}
+                <a href="javascript:void(0)"><i class="fa fa-angle-left"></i></a>
+              {% endif %}
+            </li>
+
+            {# компактная пагинация: текущая, соседние #}
+            {% for p in paginator.page_range %}
+              {% if p == page_obj.number %}
+                <li class="active"><a href="#">{{ p }}</a></li>
+              {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+                <li><a href="?page={{ p }}">{{ p }}</a></li>
+              {% endif %}
+            {% endfor %}
+
+            <li class="tg-nextpage {% if not page_obj.has_next %}disabled{% endif %}">
+              {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+              {% else %}
+                <a href="javascript:void(0)"><i class="fa fa-angle-right"></i></a>
+              {% endif %}
+            </li>
+          </ul>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block seo %}
+  {% with
+    seo_title=post.title
+    seo_description=post.short_description
+    og_url=request.build_absolute_uri
+  %}
+    {% include "partials/seo_meta.html" %}
+  {% endwith %}
+{% endblock %}
+
+{% block content %}
+<main id="tg-main" class="tg-main tg-haslayout">
+  <div class="tg-main-section tg-haslayout">
+    <div class="container">
+      <div class="row">
+        <div id="tg-twocolumns" class="tg-twocolumns tg-haslayout">
+
+          <div class="col-sm-12 col-xs-12">
+            <figure class="tg-postimg tg-postimgdetail">
+              {% if post.image %}
+                <img src="{{ post.image.url }}" alt="{{ post.title }}">
+              {% else %}
+                <img src="{% static 'images/blog/img-18.jpg' %}" alt="{{ post.title }}">
+              {% endif %}
+              <figcaption>
+                <ul class="tg-postmetadata">
+                  <li><a href="#">{{ post.author_name }}</a></li>
+                  {% if post.category %}
+                    <li><a href="{% url 'news:list' %}?category={{ post.category.slug }}">{{ post.category.name }}</a></li>
+                  {% endif %}
+                </ul>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div class="col-md-9 col-sm-8 col-xs-12 pull-left">
+            <div class="tg-postdetail">
+              <div class="tg-mathtextbox">
+                <div class="tg-section-heading">
+                  <h2>{{ post.title }}</h2>
+                </div>
+
+                {# контент из админки, допускаем HTML #}
+                {{ post.content|safe }}
+
+                {% if post.tag_list %}
+                <div class="tg-tags-social tg-haslayout">
+                  <div class="tg-tags pull-left">
+                    <i class="fa fa-tags"></i>
+                    <span>tags: </span>
+                    {% for t in post.tag_list %}
+                      <a href="{% url 'news:list' %}?tag={{ t|urlencode }}" class="tg-btn">{{ t }}</a>
+                    {% endfor %}
+                  </div>
+                </div>
+                {% endif %}
+
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 col-sm-4 col-xs-12">
+            <aside id="tg-sidebar" class="tg-sidebar">
+              <div class="tg-widget tg-search">
+                <form class="form-search" method="get" action="{% url 'news:list' %}">
+                  <fieldset>
+                    <input type="search" name="q" placeholder="Search Here" class="form-control">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                  </fieldset>
+                </form>
+              </div>
+
+              {# остальные виджеты можно оставить как статические или подключить позже #}
+            </aside>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

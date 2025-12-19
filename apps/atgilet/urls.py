@@ -11,4 +11,5 @@ urlpatterns = [
     # прямые адреса (если нужно заходить напрямую)
     path("web/", include("web.urls")),
     path("maintenance/", include("maintenance.urls")),
+    path("news/", include("news.urls", namespace="news")),
 ]

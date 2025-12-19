@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'web',
     'siteconfig',
     'results_pars',
-
+    'news',
+    
 ]
 
 MIDDLEWARE = [
