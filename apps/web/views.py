@@ -36,5 +36,5 @@ def sponsors(request):
 def contacts(request):
     return render(request, "web/contacts.html")
 
-def page_not_found_view(request, exception):
-    return render(request, "404.html", status=404)
+def page_not_found(request, exception):
+    return render(request, "web/404.html", status=404)
