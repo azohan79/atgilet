@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block content %}
+  {% blocktrans asvar page_title %}Contact{% endblocktrans %}
+  {% include "partials/page_banner.html" with title=page_title %}
+
+  <main id="tg-main" class="tg-main tg-paddingbottom-zero tg-haslayout">
+    <section class="tg-main-section tg-paddingbottom-zero tg-haslayout">
+      <div class="container">
+
+        <div class="tg-section-name">
+          <h2>{% blocktrans %}contact{% endblocktrans %}</h2>
+        </div>
+
+        <div class="col-sm-11 col-xs-11 pull-right">
+          <div class="row">
+            <div class="tg-contactus tg-haslayout">
+              <div class="row">
+
+                <div class="col-md-5 col-sm-12 col-xs-12">
+                  <div class="tg-contactinfobox">
+                    <div class="tg-section-heading">
+                      <h2>{% blocktrans %}feel free to send us your queries, Suggestion & Remarks{% endblocktrans %}</h2>
+                    </div>
+
+                    <div class="tg-description">
+                      <p>{% blocktrans %}Consectetur adipisicing elit sed do eiusmod temport incididunt utia labore et dolore magna aliqua.{% endblocktrans %}</p>
+                    </div>
+
+                    <ul class="tg-contactinfo">
+                      <li>
+                        <i class="fa fa-map-marker"></i>
+                        <address>{% blocktrans %}123 Eccles Old Road, New Salford Road London, Uk, M6 7AF{% endblocktrans %}</address>
+                      </li>
+                      <li>
+                        <i class="fa fa-phone"></i>
+                        <span>{% blocktrans %}+44 123 456 788 - 9{% endblocktrans %}</span>
+                      </li>
+                      <li>
+                        <i class="fa fa-envelope-o"></i>
+                        <a href="mailto:info@domain.com">info@domain.com</a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="col-md-7 col-sm-12 col-xs-12">
+                  <form action="#" method="post" class="tg-commentform help-form" id="tg-commentform">
+                    <fieldset>
+                      <div class="form-group">
+                        <input type="text" required placeholder="{% blocktrans %}Name*{% endblocktrans %}" class="form-control" name="contact[name]">
+                      </div>
+                      <div class="form-group">
+                        <input type="email" required placeholder="{% blocktrans %}Email*{% endblocktrans %}" class="form-control" name="contact[email]">
+                      </div>
+                      <div class="form-group">
+                        <div class="tg-select">
+                          <select name="contact[type]">
+                            <option value="">{% blocktrans %}Message Type*{% endblocktrans %}</option>
+                            <option value="Discussion">{% blocktrans %}Discussion{% endblocktrans %}</option>
+                            <option value="Help">{% blocktrans %}Help{% endblocktrans %}</option>
+                            <option value="Consultation">{% blocktrans %}Consultation{% endblocktrans %}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <textarea required placeholder="{% blocktrans %}Message*{% endblocktrans %}" name="contact[message]"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <button type="submit" class="tg-btn submit-now">{% blocktrans %}send{% endblocktrans %}</button>
+                      </div>
+                    </fieldset>
+                  </form>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="tg-mapcontent" class="tg-mapcontent owl-carousel">
+        <div class="item">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.8070273775697!2d-0.13298118405677026!3d51.516756217839884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b2d06098567%3A0x657781e4c62dccae!2s14+Tottenham+Court+Rd%2C+Fitzrovia%2C+London+W1T+1JY%2C+UK!5e0!3m2!1sen!2s!4v1468332667385"></iframe>
+        </div>
+      </div>
+
+    </section>
+  </main>
+{% endblock content %}

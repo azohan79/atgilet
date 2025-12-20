@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block content %}
+  {% blocktrans asvar page_title %}Sponsors{% endblocktrans %}
+  {% include "partials/page_banner.html" with title=page_title %}
+
+  <main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-main-section tg-haslayout">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-xs-12">
+            <div class="tg-section-heading">
+              <h2>{% blocktrans %}Our sponsors{% endblocktrans %}</h2>
+            </div>
+
+            <p>{% blocktrans %}Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.{% endblocktrans %}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock content %}

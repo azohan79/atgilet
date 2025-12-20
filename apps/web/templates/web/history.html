@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block content %}
+  {% blocktrans asvar page_title %}History{% endblocktrans %}
+  {% include "partials/page_banner.html" with title=page_title %}
+
+  <main id="tg-main" class="tg-main tg-haslayout">
+    <div class="tg-main-section tg-haslayout">
+      <div class="container">
+        <div class="row">
+          <div id="tg-twocolumns" class="tg-twocolumns tg-haslayout">
+
+            <div class="col-sm-12 col-xs-12">
+              <figure class="tg-postimg tg-postimgdetail">
+                <img src="{% static 'images/blog/img-18.jpg' %}" alt="">
+                <figcaption>
+                  <ul class="tg-postmetadata">
+                    <li><a href="#">{% blocktrans %}by admin{% endblocktrans %}</a></li>
+                    <li><a href="#">{% blocktrans %}04 comments{% endblocktrans %}</a></li>
+                    <li><a href="#">{% blocktrans %}lifestyle{% endblocktrans %}</a></li>
+                  </ul>
+                </figcaption>
+              </figure>
+            </div>
+
+            <div class="col-md-9 col-sm-8 col-xs-12 pull-left">
+              <div class="tg-postdetail">
+                <div class="tg-mathtextbox">
+                  <div class="tg-section-heading">
+                    <h2>{% blocktrans %}dipisicing elit sed do eiusmod tempor indunt{% endblocktrans %}</h2>
+                  </div>
+
+                  <p>
+                    {% blocktrans %}
+                    Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Ut enim ad minim veniam, quistan nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    {% endblocktrans %}
+                  </p>
+
+                  <p>
+                    {% blocktrans %}
+                    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores.
+                    {% endblocktrans %}
+                  </p>
+
+                  <div id="tg-matchdetailslider" class="tg-matchdetailslider">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <figure><img src="{% static 'images/match-detail/img-01.jpg' %}" alt=""></figure>
+                      </div>
+                      <div class="swiper-slide">
+                        <figure><img src="{% static 'images/match-detail/img-01.jpg' %}" alt=""></figure>
+                      </div>
+                      <div class="swiper-slide">
+                        <figure><img src="{% static 'images/match-detail/img-01.jpg' %}" alt=""></figure>
+                      </div>
+                    </div>
+                    <div class="tg-themebtnprev"><span class="fa fa-angle-right"></span></div>
+                    <div class="tg-themebtnnext"><span class="fa fa-angle-left"></span></div>
+                  </div>
+
+                  <div class="tg-section-heading">
+                    <h2>{% blocktrans %}Lorem ipsum dolor sit amet consectetur{% endblocktrans %}</h2>
+                  </div>
+
+                  <blockquote>
+                    <q>
+                      {% blocktrans %}
+                      “ Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium. ”
+                      {% endblocktrans %}
+                    </q>
+                  </blockquote>
+
+                  <ul class="tg-detail">
+                    <li><i class="fa fa-check"></i> {% blocktrans %}Consectetur adipisicing elit do eiusmod tempor{% endblocktrans %}</li>
+                    <li><i class="fa fa-check"></i> {% blocktrans %}Consectetur adipisicing elit do eiusmod tempor{% endblocktrans %}</li>
+                    <li><i class="fa fa-check"></i> {% blocktrans %}Consectetur adipisicing elit do eiusmod tempor{% endblocktrans %}</li>
+                  </ul>
+
+                  <ul class="tg-detail">
+                    <li><i class="fa fa-caret-right"></i> {% blocktrans %}Consectetur adipisicing elit do eiusmod tempor{% endblocktrans %}</li>
+                    <li><i class="fa fa-caret-right"></i> {% blocktrans %}Consectetur adipisicing elit do eiusmod tempor{% endblocktrans %}</li>
+                    <li><i class="fa fa-caret-right"></i> {% blocktrans %}Consectetur adipisicing elit do eiusmod tempor{% endblocktrans %}</li>
+                  </ul>
+
+                </div>
+              </div>
+            </div>
+
+            {# Sidebar оставляем как в оригинале позже; сейчас можно добавить при необходимости #}
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+{% endblock content %}

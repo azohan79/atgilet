@@ -20,3 +20,18 @@ def home(request):
         "slides": slides,
         "stats": stats,
     })
+    
+def history(request):
+    return render(request, "web/history.html")
+
+def school_valencia_cf(request):
+    return render(request, "web/school_valencia_cf.html")
+
+def school_academy(request):
+    return render(request, "web/school_academy.html")
+
+def sponsors(request):
+    return render(request, "web/sponsors.html")
+
+def contacts(request):
+    return render(request, "web/contacts.html")
