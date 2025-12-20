@@ -7,7 +7,6 @@
   {% endwith %}
 {% endblock seo %}
 
-
 {% block content %}
 <div class="tg-banner tg-haslayout">
   <div class="tg-imglayer">
@@ -16,15 +15,24 @@
   <div class="container">
     <div class="row">
       <div class="tg-banner-content tg-haslayout">
-        <div class="tg-pagetitle"><h1>Latest Blog / News</h1></div>
+        <div class="tg-pagetitle">
+          <h1>
+            {% blocktrans %}Últimos blogs / Noticias{% endblocktrans %}
+          </h1>
+        </div>
         <ol class="tg-breadcrumb">
-          <li><a href="{% url 'home' %}">Home</a></li>
-          <li class="active">News</li>
+          <li>
+            <a href="{% url 'home' %}">{% trans "Home" %}</a>
+          </li>
+          <li class="active">
+            {% trans "News" %}
+          </li>
         </ol>
       </div>
     </div>
   </div>
 </div>
+
 <main id="tg-main" class="tg-main tg-haslayout">
   <div class="tg-main-section tg-haslayout">
     <div class="container">
@@ -40,9 +48,15 @@
               {% endif %}
               <figcaption>
                 <ul class="tg-postmetadata">
-                  <li><a href="#">{{ post.author_name }}</a></li>
+                  <li>
+                    <a href="#">{{ post.author_name }}</a>
+                  </li>
                   {% if post.category %}
-                    <li><a href="{% url 'news:list' %}?category={{ post.category.slug }}">{{ post.category.name }}</a></li>
+                    <li>
+                      <a href="{% url 'news:list' %}?category={{ post.category.slug }}">
+                        {{ post.category.name }}
+                      </a>
+                    </li>
                   {% endif %}
                 </ul>
               </figcaption>
@@ -63,9 +77,13 @@
                 <div class="tg-tags-social tg-haslayout">
                   <div class="tg-tags pull-left">
                     <i class="fa fa-tags"></i>
-                    <span>tags: </span>
+                    <span>
+                      {% blocktrans %}tags:{% endblocktrans %}
+                    </span>
                     {% for t in post.tag_list %}
-                      <a href="{% url 'news:list' %}?tag={{ t|urlencode }}" class="tg-btn">{{ t }}</a>
+                      <a href="{% url 'news:list' %}?tag={{ t|urlencode }}" class="tg-btn">
+                        {{ t }}
+                      </a>
                     {% endfor %}
                   </div>
                 </div>
@@ -80,13 +98,20 @@
               <div class="tg-widget tg-search">
                 <form class="form-search" method="get" action="{% url 'news:list' %}">
                   <fieldset>
-                    <input type="search" name="q" placeholder="Search Here" class="form-control">
-                    <button type="submit"><i class="fa fa-search"></i></button>
+                    <input
+                      type="search"
+                      name="q"
+                      placeholder="{% trans 'Busca aquí' %}"
+                      class="form-control"
+                    >
+                    <button type="submit">
+                      <i class="fa fa-search"></i>
+                    </button>
                   </fieldset>
                 </form>
               </div>
 
-              {# остальные виджеты можно оставить как статические или подключить позже #}
+              {# остальные виджеты можно добавить позже #}
             </aside>
           </div>
 

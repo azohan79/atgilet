@@ -15,21 +15,28 @@
   <div class="container">
     <div class="row">
       <div class="tg-banner-content tg-haslayout">
-        <div class="tg-pagetitle"><h1>Latest Blog / News</h1></div>
+        <div class="tg-pagetitle">
+          <h1>
+            {% blocktrans %}Últimos blogs / Noticias{% endblocktrans %}
+          </h1>
+        </div>
         <ol class="tg-breadcrumb">
-          <li><a href="{% url 'home' %}">Home</a></li>
-          <li class="active">News</li>
+          <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+          <li class="active">{% trans "News" %}</li>
         </ol>
       </div>
     </div>
   </div>
 </div>
+
 <main id="tg-main" class="tg-main tg-haslayout">
   <div class="tg-main-section tg-haslayout">
     <div class="container">
       <div class="row">
         <div class="tg-section-name">
-          <h2>Latest blogs / News</h2>
+          <h2>
+            {% blocktrans %}Últimos blogs / Noticias{% endblocktrans %}
+          </h2>
         </div>
 
         <div class="col-sm-11 col-xs-11 pull-right">
@@ -50,8 +57,7 @@
                     <figcaption>
                       <ul class="tg-postmetadata">
                         <li><a href="#">{{ post.author_name }}</a></li>
-                        {# comments пока нет — оставим заглушку или уберём #}
-                        {# <li><a href="#">04 comments</a></li> #}
+
                         {% if post.category %}
                           <li><a href="?category={{ post.category.slug }}">{{ post.category.name }}</a></li>
                         {% endif %}
@@ -73,12 +79,15 @@
                     </p>
                   </div>
 
-                  <a class="tg-btn" href="{{ post.get_absolute_url }}">Read more</a>
+                  <a class="tg-btn" href="{{ post.get_absolute_url }}">
+                    {% blocktrans %}Leer mas{% endblocktrans %}
+                  </a>
                 </article>
               </div>
+
               {% empty %}
                 <div class="col-xs-12">
-                  <p>No news yet.</p>
+                  <p>{% blocktrans %}No news yet.{% endblocktrans %}</p>
                 </div>
               {% endfor %}
 
@@ -95,7 +104,6 @@
               {% endif %}
             </li>
 
-            {# компактная пагинация: текущая, соседние #}
             {% for p in paginator.page_range %}
               {% if p == page_obj.number %}
                 <li class="active"><a href="#">{{ p }}</a></li>
@@ -120,3 +128,4 @@
   </div>
 </main>
 {% endblock %}
+
