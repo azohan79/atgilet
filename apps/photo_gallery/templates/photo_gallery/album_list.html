@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block content %}
+<div class="tg-banner tg-haslayout">
+  <div class="tg-imglayer">
+    <img src="{% static 'images/bg-pattran.png' %}" alt="">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="tg-banner-content tg-haslayout">
+        <div class="tg-pagetitle">
+          <h1>{% trans "Photo Gallery" %}</h1>
+        </div>
+        <ol class="tg-breadcrumb">
+          <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+          <li class="active">{% trans "Photo Gallery" %}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout">
+  <div class="tg-main-section tg-haslayout">
+    <div class="container">
+      <div class="row">
+        <div class="tg-section-name">
+          <h2>{% trans "Albums" %}</h2>
+        </div>
+
+        <div id="tg-twocolumns" class="tg-twocolumns tg-haslayout">
+          <div class="col-sm-11 col-xs-11 pull-right">
+            <div class="row">
+              <div class="col-md-9 col-sm-8 col-xs-12 pull-left">
+                <div class="tg-blogpost tg-blogpostgrid">
+                  {% for album in albums %}
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                      <article class="tg-post">
+                        <figure class="tg-postimg">
+                          <a href="{{ album.get_absolute_url }}">
+                            {% if album.cover %}
+                              <img src="{{ album.cover.url }}" alt="{{ album.title|escape }}">
+                            {% else %}
+                              <img src="{% static 'images/blog/img-03.jpg' %}" alt="{{ album.title|escape }}">
+                            {% endif %}
+                          </a>
+                        </figure>
+
+                        <div class="tg-posttitle">
+                          <h3><a href="{{ album.get_absolute_url }}">{{ album.title }}</a></h3>
+                        </div>
+
+                        {% if album.description %}
+                          <div class="tg-description">
+                            <p>{{ album.description|truncatewords:28 }}</p>
+                          </div>
+                        {% endif %}
+
+                        <a class="tg-btn" href="{{ album.get_absolute_url }}">{% trans "Open album" %}</a>
+                      </article>
+                    </div>
+                  {% empty %}
+                    <div class="col-xs-12">
+                      <p>{% trans "No albums yet." %}</p>
+                    </div>
+                  {% endfor %}
+                </div>
+
+                {% if is_paginated %}
+                  <ul class="tg-pagination">
+                    <li class="tg-prevpage">
+                      {% if page_obj.has_previous %}
+                        <a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-left"></i></a>
+                      {% else %}
+                        <a href="javascript:void(0);"><i class="fa fa-angle-left"></i></a>
+                      {% endif %}
+                    </li>
+
+                    <li class="active"><a href="javascript:void(0);">{{ page_obj.number }}</a></li>
+
+                    <li class="tg-nextpage">
+                      {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                      {% else %}
+                        <a href="javascript:void(0);"><i class="fa fa-angle-right"></i></a>
+                      {% endif %}
+                    </li>
+                  </ul>
+                {% endif %}
+              </div>
+
+              {# правую колонку/сайдбар можно оставить как есть или убрать #}
+              <div class="col-md-3 col-sm-4 col-xs-12">
+                <aside id="tg-sidebar" class="tg-sidebar">
+                  {# при необходимости — позже подключим поиск/фильтры #}
+                </aside>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block content %}
+<div class="tg-banner tg-haslayout">
+  <div class="tg-imglayer">
+    <img src="{% static 'images/bg-pattran.png' %}" alt="">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="tg-banner-content tg-haslayout">
+        <div class="tg-pagetitle">
+          <h1>{{ album.title }}</h1>
+        </div>
+        <ol class="tg-breadcrumb">
+          <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
+          <li><a href="{% url 'photo_gallery:album_list' %}">{% trans "Photo Gallery" %}</a></li>
+          <li class="active">{{ album.title }}</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout">
+  <section class="tg-main-section tg-soccermedia tg-haslayout">
+    <div class="container">
+      <div class="col-sm-12 col-xs-12 pull-right">
+        <div class="row">
+
+          <div class="tg-tg-soccermedia-head tg-haslayout">
+            <ul id="tg-filterbale-nav" class="tg-filterbale-nav option-set">
+              <li><a class="active" data-filter="*" href="javascript:void(0);">{% trans "All" %}</a></li>
+              {# если позже добавим категории — сюда выведем динамически #}
+            </ul>
+          </div>
+
+          <div id="filter-masonry" class="tg-soccermedia-content tg-soccermedia-content2 tg-haslayout">
+            {% for photo in album.photos.all %}
+              <div class="masonry-grid">
+                <div class="tg-project">
+                  <figure class="tg-postimg">
+                    <img src="{{ photo.image.url }}" alt="{{ photo.alt|default:album.title|escape }}">
+                    <figcaption>
+                      {# Открытие фото в lightbox: prettyPhoto #}
+                      <a class="tg-theme-tag" data-rel="prettyPhoto[gallery]" href="{{ photo.image.url }}">
+                        <i class="fa fa-image"></i>
+                      </a>
+
+                      {# при желании можно показывать дату/год #}
+                      <a class="tg-theme-tag">{{ album.created_at|date:"Y" }}</a>
+
+                      <h3>{{ album.title }}</h3>
+                    </figcaption>
+                  </figure>
+                </div>
+              </div>
+            {% empty %}
+              <p>{% trans "No photos in this album yet." %}</p>
+            {% endfor %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
