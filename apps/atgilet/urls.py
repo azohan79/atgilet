@@ -13,3 +13,5 @@ urlpatterns = [
     # корень сайта — динамический роутер
     path("", front_router, name="home"),
 ]
+
+handler404 = "web.views.page_not_found"

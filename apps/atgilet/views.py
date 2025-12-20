@@ -24,5 +24,3 @@ def front_router(request):
 
     # основной сайт
     return web_home(request)
-
-handler404 = "web.views.page_not_found"
