@@ -10,7 +10,7 @@ urlpatterns = [
     path("", include("web.urls")),
     path("maintenance/", include("maintenance.urls")),
     path("news/", include("news.urls", namespace="news")),
-    path("gallery/", include("apps.photo_gallery.urls")),
+    path("gallery/", include("photo_gallery.urls")),
     
     # корень сайта — динамический роутер
     path("", front_router, name="home"),

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'siteconfig',
     'results_pars',
     'news',
+    "photo_gallery",
     
 ]
 
