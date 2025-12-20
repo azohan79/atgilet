@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block content %}
+
+<div class="tg-banner tg-haslayout">
+  <div class="tg-imglayer">
+    <img src="{% static 'images/bg-pattran.png' %}" alt="image description">
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="tg-banner-content tg-haslayout">
+        <div class="tg-pagetitle">
+          <h1>404</h1>
+        </div>
+        <ol class="tg-breadcrumb">
+          <li><a href="{% url 'home' %}">{% blocktrans %}Home{% endblocktrans %}</a></li>
+          <li class="active">404</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main id="tg-main" class="tg-main tg-haslayout">
+  <section class="tg-main-section tg-haslayout">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-12 col-xs-12">
+          <div class="tg-404">
+            <h2>4<span></span>4</h2>
+          </div>
+        </div>
+        <div class="col-md-4 col-sm-12 col-xs-12">
+          <div class="tg-404-content">
+            <div class="tg-section-heading">
+              <h2>{% blocktrans %}Oops! Something went wrong. Page not found.{% endblocktrans %}</h2>
+            </div>
+            <div class="tg-description">
+              <p>{% blocktrans %}The page you are looking for doesn’t exist or the address was typed incorrectly.{% endblocktrans %}</p>
+            </div>
+
+            {# По желанию: форма поиска (если нет поиска — лучше убрать) #}
+            <form class="tg-searcharea" action="{% url 'home' %}" method="get">
+              <fieldset>
+                <div class="form-group">
+                  <input type="search" name="q" placeholder="{% blocktrans %}Search{% endblocktrans %}">
+                </div>
+                <button type="submit" class="tg-btn">{% blocktrans %}Search{% endblocktrans %}</button>
+              </fieldset>
+            </form>
+
+            <div class="tg-btnbox" style="margin-top:15px;">
+              <a class="tg-btn" href="{% url 'home' %}">
+                <span>{% blocktrans %}Back to Home{% endblocktrans %}</span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock content %}

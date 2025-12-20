@@ -12,3 +12,5 @@ urlpatterns = [
     path("sponsors/", views.sponsors, name="sponsors"),
     path("contacts/", views.contacts, name="contacts"),
 ]
+
+handler404 = "web.views.page_not_found_view"
