@@ -10,11 +10,11 @@
     <div class="row">
       <div class="tg-banner-content tg-haslayout">
         <div class="tg-pagetitle">
-          <h1>{% trans "Photo Gallery" %}</h1>
+          <h1>{% trans "Galería de fotos" %}</h1>
         </div>
         <ol class="tg-breadcrumb">
-          <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
-          <li class="active">{% trans "Photo Gallery" %}</li>
+          <li><a href="{% url 'home' %}">{% trans "Inicio" %}</a></li>
+          <li class="active">{% trans "Galería de fotos" %}</li>
         </ol>
       </div>
     </div>
@@ -26,7 +26,7 @@
     <div class="container">
       <div class="row">
         <div class="tg-section-name">
-          <h2>{% trans "Albums" %}</h2>
+          <h2>{% trans "Álbumes" %}</h2>
         </div>
 
         <div id="tg-twocolumns" class="tg-twocolumns tg-haslayout">
@@ -57,12 +57,12 @@
                           </div>
                         {% endif %}
 
-                        <a class="tg-btn" href="{{ album.get_absolute_url }}">{% trans "Open album" %}</a>
+                        <a class="tg-btn" href="{{ album.get_absolute_url }}">{% trans "Álbum abierto" %}</a>
                       </article>
                     </div>
                   {% empty %}
                     <div class="col-xs-12">
-                      <p>{% trans "No albums yet." %}</p>
+                      <p>{% trans "No hay álbumes todavía." %}</p>
                     </div>
                   {% endfor %}
                 </div>

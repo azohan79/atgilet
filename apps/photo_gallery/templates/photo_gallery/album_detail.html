@@ -13,8 +13,8 @@
           <h1>{{ album.title }}</h1>
         </div>
         <ol class="tg-breadcrumb">
-          <li><a href="{% url 'home' %}">{% trans "Home" %}</a></li>
-          <li><a href="{% url 'photo_gallery:album_list' %}">{% trans "Photo Gallery" %}</a></li>
+          <li><a href="{% url 'home' %}">{% trans "Inicio" %}</a></li>
+          <li><a href="{% url 'photo_gallery:album_list' %}">{% trans "Galería de fotos" %}</a></li>
           <li class="active">{{ album.title }}</li>
         </ol>
       </div>
@@ -30,7 +30,7 @@
 
           <div class="tg-tg-soccermedia-head tg-haslayout">
             <ul id="tg-filterbale-nav" class="tg-filterbale-nav option-set">
-              <li><a class="active" data-filter="*" href="javascript:void(0);">{% trans "All" %}</a></li>
+              <li><a class="active" data-filter="*" href="javascript:void(0);">{% trans "Todos" %}</a></li>
               {# если позже добавим категории — сюда выведем динамически #}
             </ul>
           </div>
@@ -56,7 +56,7 @@
                 </div>
               </div>
             {% empty %}
-              <p>{% trans "No photos in this album yet." %}</p>
+              <p>{% trans "Aún no hay fotos en este álbum." %}</p>
             {% endfor %}
           </div>
 
