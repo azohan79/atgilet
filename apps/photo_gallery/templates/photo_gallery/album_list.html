@@ -10,11 +10,11 @@
     <div class="row">
       <div class="tg-banner-content tg-haslayout">
         <div class="tg-pagetitle">
-          <h1>{% trans "Galería de fotos" %}</h1>
+          <h1>{% blocktrans %} "Galería de fotos" {% endblocktrans %}</h1>
         </div>
         <ol class="tg-breadcrumb">
           <li><a href="{% url 'home' %}">{% trans "Inicio" %}</a></li>
-          <li class="active">{% trans "Galería de fotos" %}</li>
+          <li class="active">{% blocktrans %} "Galería de fotos" {% endblocktrans %}</li>
         </ol>
       </div>
     </div>
@@ -57,12 +57,12 @@
                           </div>
                         {% endif %}
 
-                        <a class="tg-btn" href="{{ album.get_absolute_url }}">{% trans "Álbum abierto" %}</a>
+                        <a class="tg-btn" href="{{ album.get_absolute_url }}">{% blocktrans %} "Álbum abierto" {% endblocktrans %}</a>
                       </article>
                     </div>
                   {% empty %}
                     <div class="col-xs-12">
-                      <p>{% trans "No hay álbumes todavía." %}</p>
+                      <p>{% blocktrans %} trans "No hay álbumes todavía." {% endblocktrans %}</p>
                     </div>
                   {% endfor %}
                 </div>
